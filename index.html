@@ -268,10 +268,31 @@ select.answer-select,input.answer-input{width:100%;padding:11px;border:1px solid
 </div>
 <script>
 const $=id=>document.getElementById(id);
+const SHEET_API_URL='https://script.google.com/macros/s/AKfycbxKZ7xOqBHaptQ3rMJs_ta3V8D6YIo5c5Ekc8P__Fj_eMOlhLottJUEFa6V76OR4N28/exec';
+const MPI_CODE='SISINDIRAN';
+function getDeviceId(){
+ let id='';
+ try{id=localStorage.getItem('mpiSisindiranDeviceId')||'';}catch(e){}
+ if(!id){id=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():'sis-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,12);try{localStorage.setItem('mpiSisindiranDeviceId',id)}catch(e){}}
+ return id;
+}
+function sendToSheet(action='update'){
+ const name=(()=>{try{return localStorage.getItem('mpiSisindiranNama')||$('visitorName').value.trim()}catch(e){return $('visitorName').value.trim()}})();
+ const asal=(()=>{try{return localStorage.getItem('mpiSisindiranAsal')||$('visitorOrigin').value}catch(e){return $('visitorOrigin').value}})();
+ if(!name||!asal)return;
+ let karya={};try{karya=JSON.parse(localStorage.getItem('mpiSisindiranKarya')||'{}')}catch(e){}
+ const payload={action,mpi:MPI_CODE,deviceId:getDeviceId(),nama:name,asal,
+  progres:Math.round((sections.filter(id=>state.done.includes(id)).length/sections.length)*100),
+  skorTerbaik:state.best,skorTerakhir:window.lastSisindiranScore??null,
+  jenisKarya:karya.type||'',watekKarya:karya.tone||'',karyaTerakhir:karya.text||''};
+ // Apps Script dipanggil ku mode no-cors pikeun nyingkahan preflight CORS.
+ // Hasilna teu bisa dibaca ku browser; data dikirim tanpa ngahalangan siswa diajar.
+ try{fetch(SHEET_API_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload),keepalive:true}).catch(err=>console.warn('Data MPI can dikirim:',err));}catch(err){console.warn('Data MPI can dikirim:',err)}
+}
 const sections=['pangwanoh','materi','kaulinan','latihan','asesmen'];
 let state={done:[],best:null};
 try{state={...state,...JSON.parse(localStorage.getItem('mpiSisindiranKelas8')||'{}')}}catch(e){}
-function save(){try{localStorage.setItem('mpiSisindiranKelas8',JSON.stringify(state))}catch(e){}updateStats()}
+function save(){try{localStorage.setItem('mpiSisindiranKelas8',JSON.stringify(state))}catch(e){}updateStats();sendToSheet('update')}
 function complete(id){if(!state.done.includes(id))state.done.push(id);save()}
 function openPage(id){document.querySelectorAll('.content').forEach(x=>x.classList.remove('active'));$(id).classList.add('active');window.scrollTo({top:0,behavior:'smooth'});updateStats()}
 function updateStats(){const n=sections.filter(id=>state.done.includes(id)).length,p=Math.round(n/sections.length*100);$('doneCount').textContent=n+'/'+sections.length;$('progressPct').textContent=p+'%';$('progressLabel').textContent=p+'%';$('progressBar').style.width=p+'%';$('bestScore').textContent=state.best===null?'—':state.best+'%'}
@@ -389,6 +410,7 @@ function saveCreation(){
  f.hidden=false;
  if(val.length<25){f.className='feedback bad';f.textContent='Sisindiranana masih pondok. Cobi lengkepan heula sangkan maksudna écés.';return}
  try{localStorage.setItem('mpiSisindiranKarya',JSON.stringify({type:$('createType').value,tone:$('createTone').value,text:val}))}catch(e){}
+ sendToSheet('update');
  f.className='feedback good';f.innerHTML='<b>Hasil latihan geus disimpen dina browser ieu.</b><br>Pariksa deui: naha wangunna geus luyu, eusina kaharti, purwakantina merenah, jeung basana sopan?';
 }
 function clearCreation(){$('createText').value='';$('creationFeedback').hidden=true}
@@ -428,14 +450,16 @@ function nextAssessment(){
 function showAssessmentResult(){
  let score=0;assessmentQuestions.forEach((q,i)=>{if(assessment.answers[i]===q.c)score++});
  const pct=Math.round(score/assessmentQuestions.length*100);
+ window.lastSisindiranScore=pct;
  state.best=state.best===null?pct:Math.max(state.best,pct);save();
+ sendToSheet('update');
  $('assessmentArea').hidden=true;$('assessmentResult').hidden=false;
  let review=assessmentQuestions.map((q,i)=>`<div class="feedback ${assessment.answers[i]===q.c?'good':'bad'}"><b>${i+1}. ${assessment.answers[i]===q.c?'Bener':'Can bener'}</b><br>${q.q}<br><span class="small">Jawaban bener: ${q.a[q.c]}. ${q.e}</span></div>`).join('');
  $('assessmentResult').innerHTML=`<h3>Hasil Asesmen</h3><div class="result-score">${pct}%</div><p>Jawaban bener ${score} tina ${assessmentQuestions.length} soal.</p><div class="feedback ${pct>=75?'good':'bad'}">${pct>=75?'Wilujeng! Pamahaman geus hadé.':'Hayu diajar deui. Tengetan pedaran dina unggal soal, laju jajal deui.'}</div><h3>Pedaran Jawaban</h3>${review}<div class="control-row"><button class="action-btn" onclick="beginAssessment()">Jajal Deui</button><button class="light-btn" onclick="complete('asesmen');openPage('home')">Réngsé → Beranda</button></div>`;
  if(pct>=75)complete('asesmen');
 }
 
-$('visitorForm').addEventListener('submit',e=>{e.preventDefault();const name=$('visitorName').value.trim(),origin=$('visitorOrigin').value;if(!name||!origin)return;try{localStorage.setItem('mpiSisindiranNama',name);localStorage.setItem('mpiSisindiranAsal',origin)}catch(e){}$('visitorGate').style.display='none'});
+$('visitorForm').addEventListener('submit',e=>{e.preventDefault();const name=$('visitorName').value.trim(),origin=$('visitorOrigin').value;if(!name||!origin)return;try{localStorage.setItem('mpiSisindiranNama',name);localStorage.setItem('mpiSisindiranAsal',origin)}catch(e){}sendToSheet('visitor');$('visitorGate').style.display='none'});
 try{$('visitorName').value=localStorage.getItem('mpiSisindiranNama')||'';$('visitorOrigin').value=localStorage.getItem('mpiSisindiranAsal')||''}catch(e){}
 updateStats();
 </script>
