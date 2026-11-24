@@ -261,7 +261,8 @@ function sendToSheet(action='update'){
  // Hasilna teu bisa dibaca ku browser; data dikirim tanpa ngahalangan siswa diajar.
  try{fetch(SHEET_API_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload),keepalive:true}).catch(err=>console.warn('Data MPI can dikirim:',err));}catch(err){console.warn('Data MPI can dikirim:',err)}
 }
-const sections=['pangwanoh','materi','rupa','evaluasi'];
+// Kamajuan diajar diitung tina tilu bagian matéri; Evaluasi henteu diasupkeun kana perséntase.
+const sections=['pangwanoh','materi','rupa'];
 let state={done:[],best:null};
 try{state={...state,...JSON.parse(localStorage.getItem('mpiSisindiranKelas8')||'{}')}}catch(e){}
 // Migrasi progres tina vérsi menu heubeul kana opat bagian anyar.
@@ -270,7 +271,14 @@ if(state.done.includes('asesmen'))state.done.push('evaluasi');
 state.done=[...new Set(state.done)];
 function save(){try{localStorage.setItem('mpiSisindiranKelas8',JSON.stringify(state))}catch(e){}updateStats();sendToSheet('update')}
 function complete(id){if(!state.done.includes(id))state.done.push(id);save()}
-function openPage(id){document.querySelectorAll('.content').forEach(x=>x.classList.remove('active'));$(id).classList.add('active');window.scrollTo({top:0,behavior:'smooth'});updateStats()}
+function openPage(id){
+ document.querySelectorAll('.content').forEach(x=>x.classList.remove('active'));
+ $(id).classList.add('active');
+ window.scrollTo({top:0,behavior:'smooth'});
+ // Kaca 01, 02, jeung 03 otomatis kacatet nalika dibuka ku murid.
+ if(sections.includes(id))complete(id);
+ else updateStats();
+}
 function updateStats(){const n=sections.filter(id=>state.done.includes(id)).length,p=Math.round(n/sections.length*100);$('doneCount').textContent=n+'/'+sections.length;$('progressPct').textContent=p+'%';$('progressLabel').textContent=p+'%';$('progressBar').style.width=p+'%';$('bestScore').textContent=state.best===null?'—':state.best+'%'}
 const topicNames={wawasan:'Wawasan Sisindiran',paparikan:'Paparikan',rarakitan:'Rarakitan',wawangsalan:'Wawangsalan',unsur:'Unsur Sisindiran',eusi:'Eusi jeung Tujuan Sisindiran'};
 const topicContent={
