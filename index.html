@@ -61,6 +61,7 @@ button{font:inherit;cursor:pointer}
 .navrow button.active{background:var(--brown);color:white}
 .footer{text-align:center;color:var(--muted);font-size:12px;margin-top:35px}
 .small{font-size:12px;color:var(--muted)}
+.flowing-topic{padding:22px 23px}.flowing-topic h3{margin-top:18px}.topic-number{font-size:11px;letter-spacing:.13em;font-weight:800;color:var(--sage-dark);margin-bottom:8px}.eval-tabs{display:flex;gap:10px;flex-wrap:wrap;margin:4px 0 22px}.eval-tab{border:1px solid #eadbd2;background:#fff;color:#75434a;border-radius:30px;padding:12px 17px;font:inherit;cursor:pointer}.eval-tab.active{background:#75434a;color:#fff;border-color:#75434a}.eval-tab:focus-visible{outline:3px solid #d8b8a5;outline-offset:2px}.choice:disabled{cursor:default;opacity:.85}.answer-explanation{margin-top:14px;padding:14px 16px;border-radius:12px;background:#f5f0e9;border-left:4px solid #9b8068}.answer-explanation.good{border-left-color:#4c9870}.answer-explanation.bad{border-left-color:#b65d5d}.result-table{width:100%;border-collapse:collapse;margin:12px 0}.result-table th,.result-table td{padding:11px 12px;border-bottom:1px solid var(--line);text-align:left;font-size:13px}.result-table th{background:#F4EEE6;color:var(--brown)}
 .submenu{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
 .submenu button{border:1px solid var(--line);background:#fff;border-radius:12px;padding:13px;text-align:left;color:var(--brown)}
 .submenu button strong{display:block;color:var(--terracotta);margin-bottom:3px}
@@ -77,7 +78,7 @@ button{font:inherit;cursor:pointer}
  .hero{padding:23px 19px;border-radius:19px}.stats{gap:8px}.stat{padding:12px}.stat b{font-size:20px}.stat small{font-size:10px}
  .grid{gap:9px}.tile{padding:13px;min-height:132px}.section-head h2{font-size:18px}
  .two{grid-template-columns:1fr}.lesson-head{padding:20px}.lesson-head h2{font-size:23px}
- .submenu{grid-template-columns:1fr 1fr}
+ .submenu{grid-template-columns:1fr 1fr}.flowing-topic{padding:17px}
 }
 
 .interactive{margin-top:14px}
@@ -101,6 +102,9 @@ textarea.answer-box{width:100%;min-height:105px;resize:vertical;border:1px solid
 select.answer-select,input.answer-input{width:100%;padding:11px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);font:inherit}
 .result-score{font-family:Georgia,serif;font-size:36px;color:var(--terracotta);font-weight:800}
 @media(max-width:560px){.control-row button{flex:1}.choice{padding:11px}}
+
+
+.creative-task{padding:0}.creative-task>p{margin:12px 0 18px}.creative-fields{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:14px 0}.creative-fields label{display:flex;flex-direction:column;gap:7px}.creative-select{width:100%;min-height:52px;border:1px solid #ead8c8;border-radius:13px;background:#fff;padding:12px 16px;font:inherit;color:inherit}.creative-writing-label{display:block;margin:16px 0 10px}.creative-textarea{width:100%;min-height:130px;resize:vertical}.creative-actions{margin-top:18px}.creative-actions button{min-height:54px}@media(max-width:650px){.creative-fields{grid-template-columns:1fr;gap:12px}}
 
 </style>
 </head>
@@ -129,145 +133,113 @@ select.answer-select,input.answer-input{width:100%;padding:11px;border:1px solid
  <div class="hero">
   <div class="eyebrow">WILUJENG SUMPING!</div>
   <h1>Hayu Ngulik<br>Sisindiran Sunda!</h1>
-  <p>Diajar mikanyaho sisindiran, ngabédakeun paparikan, rarakitan, jeung wawangsalan, laju nyieun sisindiran sorangan kalayan kréatif.</p>
+  <p>Diajar wawasan jeung unsur sisindiran, mikanyaho rupa jeung eusina, laju nguji pamahaman ngaliwatan evaluasi anu variatif.</p>
   <button class="primary" onclick="openPage('pangwanoh')">Mimitian Diajar →</button>
  </div>
  <div class="stats">
-  <div class="stat"><b id="doneCount">0/5</b><small>Bagéan diajar</small></div>
+  <div class="stat"><b id="doneCount">0/3</b><small>Bagéan diajar</small></div>
   <div class="stat"><b id="bestScore">—</b><small>Skor pangluhurna</small></div>
   <div class="stat"><b id="progressPct">0%</b><small>Kamajuan diajar</small></div>
  </div>
  <div class="section-head"><div><h2>Jelajah Pangajaran</h2><p>Pilih salah sahiji bagian pikeun ngamimitian.</p></div><span class="badge">Kelas VIII</span></div>
  <div class="grid">
-  <button class="tile" onclick="openPage('pangwanoh')"><div class="ico">📖</div><strong>01 · Pangwanoh</strong><small>Tujuan jeung pituduh diajar sisindiran</small></button>
-  <button class="tile" onclick="openPage('materi')"><div class="ico">📚</div><strong>02 · Materi</strong><small>Wawasan, rupa-rupa, jeung unsur sisindiran</small></button>
-  <button class="tile" onclick="openPage('kaulinan')"><div class="ico">🧩</div><strong>03 · Kaulinan</strong><small>Ulin bari mikawanoh sisindiran</small></button>
-  <button class="tile" onclick="openPage('latihan')"><div class="ico">✍️</div><strong>04 · Latihan</strong><small>Ngulik jeung nyieun sisindiran</small></button>
-  <button class="tile" onclick="openPage('asesmen')"><div class="ico">🎯</div><strong>05 · Asesmen</strong><small>Uji pamahaman jeung tingali hasil diajar</small></button>
-  <button class="tile" onclick="openPage('pituduh')"><div class="ico">💡</div><strong>06 · Pituduh</strong><small>Cara ngagunakeun média pangajaran</small></button>
+  <button class="tile" onclick="openPage('pangwanoh')"><div class="ico">📖</div><strong>01 · Pangwanoh</strong><small>CP, TP, jeung ATP pangajaran sisindiran</small></button>
+  <button class="tile" onclick="openPage('materi')"><div class="ico">📚</div><strong>02 · Materi</strong><small>Wawasan jeung unsur sisindiran</small></button>
+  <button class="tile" onclick="openPage('rupa')"><div class="ico">🪶</div><strong>03 · Rupa jeung Eusi Sisindiran</strong><small>Paparikan, rarakitan, wawangsalan, jeung watekna</small></button>
+  <button class="tile" onclick="openPage('evaluasi')"><div class="ico">✍️</div><strong>04 · Evaluasi</strong><small>Pilihan ganda, benar-salah, jeung uraian</small></button>
  </div>
  <div class="section-head"><div><h2>Kamajuan Diajar</h2><p>Kamajuan kacatet dina browser anu dipaké.</p></div></div>
  <div class="panel"><div style="display:flex;justify-content:space-between;gap:10px"><strong>Progres sakabéhna</strong><strong id="progressLabel">0%</strong></div><div class="progress"><span id="progressBar"></span></div><p class="small">Geura réngsékeun unggal bagian, laju jajal asesmen pikeun ngukur pamahaman.</p></div>
 </section>
 
 <section id="pangwanoh" class="content">
- <button class="back" onclick="openPage('home')">← Beranda</button>
- <div class="lesson-head"><span class="eyebrow">BAGÉAN 01</span><h2>Pangwanoh</h2><p>Ngawanohkeun tujuan jeung pituduh diajar sisindiran.</p></div>
- <div class="panel"><h3>Wilujeng diajar!</h3><p>Dina média pangajaran ieu, urang bakal ngulik salah sahiji wangun karya sastra Sunda, nyaéta sisindiran. Urang bakal mikanyaho rupa-rupa sisindiran, nalungtik wangunna, sarta diajar nyieun sisindiran sorangan.</p><div class="callout"><b>Hayu mimitian ku pananya:</b><br>Naha kungsi ngadéngékeun atawa maca sisindiran? Naon anu matak narik tina éta sisindiran?</div></div>
- <div class="two">
-  <div class="panel"><h3>Tujuan pangajaran</h3><ol><li>Ngajelaskeun harti jeung fungsi sisindiran.</li><li>Ngabédakeun paparikan, rarakitan, jeung wawangsalan.</li><li>Nangtukeun cangkang, eusi, jeung purwakanti.</li><li>Nganalisis maksud jeung amanat sisindiran.</li><li>Nyieun sisindiran luyu jeung wangunna.</li></ol></div>
-  <div class="panel"><h3>Pituduh diajar</h3><ol><li>Jelajah unggal menu sacara ngaruntuy.</li><li>Baca pedaran jeung tengetan conto.</li><li>Ilubiung dina kaulinan jeung latihan.</li><li>Réngsékeun asesmen.</li><li>Tingali hasil jeung kamajuan diajar.</li></ol></div>
- </div>
- <div class="panel"><button class="primary" onclick="complete('pangwanoh');openPage('materi')">Bagéan ieu geus kaharti →</button></div>
-</section>
+  <button class="back" onclick="openPage('home')">← Beranda</button>
+  <div class="lesson-head"><span class="eyebrow">BAGÉAN 01</span><h2>Pangwanoh</h2><p>Ngawanohkeun arah jeung tujuan pangajaran sisindiran.</p></div>
+  <div class="panel">
+   <h3>Capaian Pembelajaran (CP)</h3>
+   <p>Dina pangajaran sisindiran, murid dipiharep mampuh maham informasi jeung eusi karya sastra Sunda, nganalisis wangun katut unsur basa dina sisindiran, nepikeun pamadegan sacara lisan, sarta ngébréhkeun gagasan dina wangun sisindiran anu merenah tur kréatif.</p>
+   <div class="two">
+    <div class="note"><b>Maca jeung ngaregepkeun</b><br>Murid mampuh maham eusi, maksud, jeung amanat sisindiran tina téks atawa conto anu dibaca jeung diregepkeun.</div>
+    <div class="note"><b>Nyarita</b><br>Murid mampuh nepikeun hasil panitén jeung pamahaman ngeunaan sisindiran ku basa Sunda anu merenah.</div>
+    <div class="note"><b>Nulis</b><br>Murid mampuh nyusun sisindiran dumasar kana wangun, unsur, jeung watekna.</div>
+    <div class="note"><b>Nalar jeung nganalisis</b><br>Murid mampuh ngabédakeun rupa-rupa sisindiran sarta ngajelaskeun hubungan cangkang, eusi, purwakanti, jeung wangsal.</div>
+   </div>
+  </div>
+  <div class="panel"><h3>Tujuan Pembelajaran (TP)</h3>
+   <ol>
+    <li>Ngajelaskeun harti jeung fungsi sisindiran.</li>
+    <li>Nangtukeun unsur sisindiran, ngawengku padalisan, cangkang, eusi, wangsal, jeung purwakanti.</li>
+    <li>Ngabédakeun paparikan, rarakitan, jeung wawangsalan dumasar kana ciri wangunna.</li>
+    <li>Nganalisis eusi, watek, maksud, jeung amanat sisindiran.</li>
+    <li>Nyieun sisindiran basajan luyu jeung wangun katut watek anu dipilih.</li>
+   </ol>
+  </div>
+  <div class="panel"><h3>Alur Tujuan Pembelajaran (ATP)</h3>
+   <div class="note"><b>Alur 1 · Ngawanohkeun sisindiran</b><br>Murid maca jeung ngaregepkeun conto, laju ngajelaskeun harti, ciri umum, jeung fungsi sisindiran.</div>
+   <div class="note"><b>Alur 2 · Mikanyaho unsur sisindiran</b><br>Murid ngaidentifikasi padalisan, cangkang, eusi, wangsal, jeung purwakanti dina conto sisindiran.</div>
+   <div class="note"><b>Alur 3 · Nganalisis rupa jeung eusi</b><br>Murid ngabédakeun paparikan, rarakitan, jeung wawangsalan, laju nangtukeun watek jeung amanatna.</div>
+   <div class="note"><b>Alur 4 · Nyieun sisindiran</b><br>Murid nyusun sisindiran basajan dumasar kana téma, wangun, jeung watek anu geus ditangtukeun.</div>
+  </div>
+  <div class="panel"><button class="primary" onclick="complete('pangwanoh');openPage('materi')">Mimitian ngulik matéri →</button></div>
+ </section>
 
 <section id="materi" class="content">
- <button class="back" onclick="openPage('home')">← Beranda</button>
- <div class="lesson-head"><span class="eyebrow">BAGÉAN 02</span><h2>Materi Sisindiran</h2><p>Pilih jejer matéri anu rék diulik.</p></div>
- <div class="panel"><h3>Jelajah matéri</h3><p>Pilih jejer di handap. Baca pedaran, tengetan conto, laju bandingkeun ciri-cirina.</p>
-  <div class="submenu">
-   <button onclick="openTopic('wawasan')"><strong>01 · Wawasan</strong><small>Harti, ciri, jeung fungsi</small></button>
-   <button onclick="openTopic('paparikan')"><strong>02 · Paparikan</strong><small>Wangun jeung conto</small></button>
-   <button onclick="openTopic('rarakitan')"><strong>03 · Rarakitan</strong><small>Wangun jeung conto</small></button>
-   <button onclick="openTopic('wawangsalan')"><strong>04 · Wawangsalan</strong><small>Wangun jeung conto</small></button>
-   <button onclick="openTopic('unsur')"><strong>05 · Unsur</strong><small>Cangkang, eusi, purwakanti</small></button>
-   <button onclick="openTopic('eusi')"><strong>06 · Eusi jeung tujuan</strong><small>Silih asih, piwuruk, sésébréd</small></button>
-  </div>
- </div>
- <div id="topicPanel" class="panel"><h3>Wilujeng ngulik!</h3><p>Pilih salah sahiji jejer matéri di luhur pikeun muka pedaranana. Unggal jejer dibarengan ku conto jeung hal-hal anu kudu diperhatikeun.</p></div>
- <div class="panel"><h3>Rujukan bahan</h3><p class="small">Pedaran disusun pikeun pangajaran kelas VIII kalayan ngagunakeun rujukan bahan ajar Basa Sunda. Sababaraha conto sisindiran dicutat tina bahan pangajaran anu dirujuk, sedengkeun katerangan jeung kagiatan diringkeskeun deui ku basa anu leuwih basajan.</p><ul class="small"><li><a href="https://bahasasunda.id/materi-kawih-basa-sunda-kurikulum-merdeka/" target="_blank" rel="noopener">Bahasasunda.id – Guaran jeung wangun sisindiran</a></li><li><a href="https://repositori.kemendikdasmen.go.id/9056/1/Modul%20BS-B%20NUNUY%2016-04-2016%20%20150%20hal.bey%20sip_ok.pdf" target="_blank" rel="noopener">Repositori Kemendikdasmen – Modul Basa Sunda</a></li></ul><p class="small">Catetan: aturan jumlah engang jeung wangun bisa kapanggih variasina dina tradisi jeung sumber pangajaran. Dina média ieu dipaké pola anu ilahar pikeun latihan dasar.</p></div>
- <div class="panel"><button class="primary" onclick="complete('materi');openPage('kaulinan')">Bagéan matéri geus kaharti →</button></div>
-</section>
+  <button class="back" onclick="openPage('home')">← Beranda</button>
+  <div class="lesson-head"><span class="eyebrow">BAGÉAN 02</span><h2>Materi</h2><p>Ngulik wawasan jeung unsur anu ngawangun sisindiran.</p></div>
+  <div id="flowingMaterials" class="flowing-materials"></div>
+  <div class="panel"><button class="primary" onclick="complete('materi');openPage('rupa')">Teruskeun kana rupa jeung eusi →</button></div>
+ </section>
 
-<section id="kaulinan" class="content">
- <button class="back" onclick="openPage('home')">← Beranda</button>
- <div class="lesson-head"><span class="eyebrow">BAGÉAN 03</span><h2>Kaulinan Sisindiran</h2><p>Ulin bari diajar. Pilih kaulinan anu dipikaresep, laju jawab kalawan taliti.</p></div>
- <div class="panel">
-  <h3>Pilih kaulinan</h3>
-  <div class="submenu">
-   <button onclick="startGame('jenis')"><strong>🧩 01 · Tebak Jinis</strong><small>Nangtukeun paparikan, rarakitan, atawa wawangsalan.</small></button>
-   <button onclick="startGame('unsur')"><strong>🔎 02 · Cangkang atawa Eusi?</strong><small>Ngawanohkeun bagian-bagian sisindiran.</small></button>
-   <button onclick="startGame('wangsal')"><strong>💡 03 · Teguh Wangsal</strong><small>Néangan jawaban dina wawangsalan.</small></button>
-  </div>
- </div>
- <div id="gameArea" class="panel interactive">
-  <h3>Wilujeng ulin!</h3><p>Pilih salah sahiji kaulinan di luhur. Unggal kaulinan miboga sababaraha pananya jeung umpan balik langsung.</p>
-  <div class="callout">Tips: baca heula sakabéh padalisan. Ulah buru-buru nangtukeun jawaban tina hiji kecap wungkul.</div>
- </div>
-</section>
+<section id="rupa" class="content">
+  <button class="back" onclick="openPage('home')">← Beranda</button>
+  <div class="lesson-head"><span class="eyebrow">BAGÉAN 03</span><h2>Rupa jeung Eusi Sisindiran</h2></div>
+  <div id="flowingRupa" class="flowing-materials"></div>
+  <div class="panel"><button class="primary" onclick="complete('rupa');openPage('evaluasi')">Geus ngulik, teruskeun kana evaluasi →</button></div>
+ </section>
 
-<section id="latihan" class="content">
- <button class="back" onclick="openPage('home')">← Beranda</button>
- <div class="lesson-head"><span class="eyebrow">BAGÉAN 04</span><h2>Latihan</h2><p>Ngalarapkeun pangaweruh ku cara nganalisis jeung nyieun sisindiran sorangan.</p></div>
- <div class="panel">
-  <h3>Latihan 1 · Analisis sisindiran</h3>
-  <p>Baca ieu sisindiran, laju pilih jawaban anu pangmerenahna.</p>
-  <div class="note">Salawé mah dua lima,<br>dibeulikeun kana lohan.<br>Awéwé jaman ayeuna,<br>leutik-leutik geus bobogohan.</div>
-  <div class="question-meta">PANANYA 1</div>
-  <p>Padalisan katilu jeung kaopat kaasup kana bagian naon?</p>
-  <div class="choice-list" id="practiceQ1">
-   <button class="choice" onclick="practicePick(this,'wrong')">Cangkang</button>
-   <button class="choice" onclick="practicePick(this,'correct')">Eusi</button>
-   <button class="choice" onclick="practicePick(this,'wrong')">Wangsal</button>
+ <section id="evaluasi" class="content">
+  <button class="back" onclick="openPage('home')">← Beranda</button>
+  <div class="lesson-head"><span class="eyebrow">BAGÉAN 04</span><h2>Evaluasi</h2><p>Uji pamahaman ngaliwatan soal pilihan ganda, benar-salah, jeung uraian.</p></div>
+  <div class="panel">
+   <h3>Menu Evaluasi</h3>
+   <div class="control-row">
+    <button class="action-btn" onclick="showEvaluationIntro()">Mimitian Evaluasi</button>
+    <button class="light-btn" onclick="showLearningResults()">Hasil Diajar</button>
+    <button class="light-btn" onclick="resetEvaluation()">Reset</button>
+   </div>
   </div>
-  <div id="practiceFeedback1" class="feedback" hidden></div>
- </div>
- <div class="panel">
-  <h3>Latihan 2 · Ngalengkepan sisindiran</h3>
-  <p>Eusi sisindiran di handap kudu ngandung piwuruk ngeunaan diajar. Pilih padalisan anu pangmerenahna pikeun ngalengkepan eusi.</p>
-  <div class="note">Hiji kali hiji éta hiji,<br>dua kali hiji éta dua.<br>________________________<br>________________________</div>
-  <div class="choice-list" id="practiceQ2">
-   <button class="choice" onclick="practicePair(this,0)">Lamun urang bisa ngaji,<br>tangtuna bisa ngadoa.</button>
-   <button class="choice" onclick="practicePair(this,1)">Lamun urang rajin solat,<br>tangtu salamet di jalan.</button>
-   <button class="choice" onclick="practicePair(this,2)">Langit peuting pinuh béntang,<br>bulan caang nyaangan bumi.</button>
+  <div class="panel" id="evaluationIntro">
+   <h3>Evaluasi Pangajaran Sisindiran</h3>
+   <p>Evaluasi ngawengku 25 soal pilihan ganda, 10 soal benar-salah, jeung hiji latihan uraian. Jawab sakabéh soal kalawan tenget. Soal pilihan ganda jeung benar-salah dipariksa otomatis, ari jawaban uraian bisa dipariksa deui ku guru.</p>
+   <div class="callout"><b>Pituduh:</b> jawab sacara mandiri. Pikeun soal uraian, tuliskeun jawaban anu écés tur lengkep. Hasil evaluasi jeung skor pangluhurna bakal kacatet dina alat anu dipaké.</div>
+   <button class="action-btn" onclick="beginEvaluation()">Mimitian Evaluasi →</button>
   </div>
-  <div id="practiceFeedback2" class="feedback" hidden></div>
- </div>
- <div class="panel">
-  <h3>Latihan 3 · Nyieun sisindiran sorangan</h3>
-  <p>Pilih wangun jeung watek sisindiran, laju tuliskeun karya sorangan. Ieu latihan kréatif, jadi jawaban henteu otomatis dibéré skor.</p>
-  <div class="two">
-   <div><label for="createType"><b>Wangun sisindiran</b></label><select id="createType" class="answer-select"><option>Paparikan</option><option>Rarakitan</option><option>Wawangsalan</option></select></div>
-   <div><label for="createTone"><b>Watek / tujuan</b></label><select id="createTone" class="answer-select"><option>Piwuruk</option><option>Silih asih</option><option>Sésébréd</option></select></div>
+  <div class="panel" id="evaluationArea" hidden>
+   <div class="eval-tabs" role="tablist" aria-label="Wangun soal">
+    <button class="eval-tab active" id="tab-pg" onclick="switchEvaluation('pg')">Pilihan Ganda · 25</button>
+    <button class="eval-tab" id="tab-bs" onclick="switchEvaluation('bs')">Benar–Salah · 10</button>
+    <button class="eval-tab" id="tab-essay" onclick="switchEvaluation('essay')">Uraian · 1</button>
+   </div>
+   <div class="question-meta" id="evaluationCount">PILIHAN GANDA · SOAL 1 TI 15</div>
+   <div class="progress-mini"><span id="evaluationProgress"></span></div>
+   <div id="evaluationQuestion"></div>
+   <div class="control-row">
+    <button class="action-btn" id="evaluationCheck" onclick="checkCurrentAnswer()">Pariksa Hasil</button>
+    <button class="light-btn" id="evaluationNext" onclick="nextEvaluation()" disabled>Soal Saterusna →</button>
+   </div>
+   <div id="evaluationNotice" class="feedback" hidden></div>
   </div>
-  <p><label for="createText"><b>Tuliskeun sisindiran</b></label></p>
-  <textarea id="createText" class="answer-box" placeholder="Tulis sisindiran di dieu..."></textarea>
-  <div class="control-row"><button class="action-btn" onclick="saveCreation()">Simpen hasil latihan</button><button class="light-btn" onclick="clearCreation()">Hapus tulisan</button></div>
-  <div id="creationFeedback" class="feedback" hidden></div>
- </div>
- <div class="panel"><button class="primary" onclick="complete('latihan');openPage('asesmen')">Latihan geus réngsé, ka Asesmen →</button></div>
-</section>
+  <div class="panel" id="evaluationResult" hidden></div>
+ </section>
 
-<section id="asesmen" class="content">
- <button class="back" onclick="openPage('home')">← Beranda</button>
- <div class="lesson-head"><span class="eyebrow">BAGÉAN 05</span><h2>Asesmen</h2><p>Uji pamahaman ngeunaan wawasan, wangun, unsur, jeung eusi sisindiran.</p></div>
- <div class="panel" id="assessmentIntro">
-  <h3>Asesmen Sumatif</h3>
-  <p>Asesmen diwangun ku 10 soal pilihan ganda. Pilih hiji jawaban anu pangbenerna. Sanggeus réngsé, klik tombol <b>Pariksa Jawaban</b> pikeun ningali skor jeung pedaran jawaban.</p>
-  <div class="callout"><b>Pituduh:</b> jawab sacara mandiri. Skor kacatet dina browser ieu pikeun ningali skor pangluhurna.</div>
-  <button class="action-btn" onclick="beginAssessment()">Mimitian Asesmen →</button>
- </div>
- <div class="panel" id="assessmentArea" hidden>
-  <div class="question-meta" id="assessmentCount">SOAL 1 TI 10</div>
-  <div class="progress-mini"><span id="assessmentProgress"></span></div>
-  <div id="assessmentQuestion"></div>
-  <div class="control-row"><button class="action-btn" onclick="nextAssessment()">Soal Saterusna →</button></div>
-  <div id="assessmentNotice" class="feedback" hidden></div>
- </div>
- <div class="panel" id="assessmentResult" hidden></div>
-</section>
-
-<section id="pituduh" class="content">
- <button class="back" onclick="openPage('home')">← Beranda</button>
- <div class="lesson-head"><span class="eyebrow">PITUDUH</span><h2>Cara Ngagunakeun MPI</h2><p>Pituduh singget pikeun ngagunakeun média pangajaran.</p></div>
- <div class="panel"><ol><li>Eusian idéntitas nalika mimiti muka média.</li><li>Pilih menu dina Beranda.</li><li>Gunakeun tombol balik pikeun mulang ka menu saméméhna.</li><li>Turutan runtuyan matéri jeung kagiatan.</li><li>Kamajuan diajar kacatet dina browser/perangkat anu sarua.</li></ol><div class="note">MPI ieu dirarancang responsif pikeun HP, tablet, jeung laptop.</div></div>
-</section>
-
-<footer class="footer">MPI SISINDIRAN · IRMAL SUNDA · BASA SUNDA KELAS VIII SMP</footer>
+<footer class="footer">MPI SISINDIRAN · IRMAL SUNDA · KELAS VIII SMP</footer>
 </main>
 </div>
 <script>
 const $=id=>document.getElementById(id);
+function escapeHtml(value){
+ return String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+}
 const SHEET_API_URL='https://script.google.com/macros/s/AKfycbxKZ7xOqBHaptQ3rMJs_ta3V8D6YIo5c5Ekc8P__Fj_eMOlhLottJUEFa6V76OR4N28/exec';
 const MPI_CODE='SISINDIRAN';
 function getDeviceId(){
@@ -289,9 +261,13 @@ function sendToSheet(action='update'){
  // Hasilna teu bisa dibaca ku browser; data dikirim tanpa ngahalangan siswa diajar.
  try{fetch(SHEET_API_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload),keepalive:true}).catch(err=>console.warn('Data MPI can dikirim:',err));}catch(err){console.warn('Data MPI can dikirim:',err)}
 }
-const sections=['pangwanoh','materi','kaulinan','latihan','asesmen'];
+const sections=['pangwanoh','materi','rupa','evaluasi'];
 let state={done:[],best:null};
 try{state={...state,...JSON.parse(localStorage.getItem('mpiSisindiranKelas8')||'{}')}}catch(e){}
+// Migrasi progres tina vérsi menu heubeul kana opat bagian anyar.
+if(state.done.includes('kaulinan')||state.done.includes('latihan'))state.done.push('rupa');
+if(state.done.includes('asesmen'))state.done.push('evaluasi');
+state.done=[...new Set(state.done)];
 function save(){try{localStorage.setItem('mpiSisindiranKelas8',JSON.stringify(state))}catch(e){}updateStats();sendToSheet('update')}
 function complete(id){if(!state.done.includes(id))state.done.push(id);save()}
 function openPage(id){document.querySelectorAll('.content').forEach(x=>x.classList.remove('active'));$(id).classList.add('active');window.scrollTo({top:0,behavior:'smooth'});updateStats()}
@@ -300,163 +276,446 @@ const topicNames={wawasan:'Wawasan Sisindiran',paparikan:'Paparikan',rarakitan:'
 const topicContent={
  wawasan:`<span class="pill">01 · WAWASAN</span>
  <h3>Naon ari sisindiran?</h3>
- <p><b>Sisindiran</b> nyaéta karya sastra Sunda wangun puisi anu ngagunakeun rakitan basa kalawan dibalibirkeun. Maksud anu rék ditepikeun henteu salawasna disebutkeun sacara togmol, tapi ditepikeun ku ungkara anu diréka sangkan leuwih merenah, éndah, atawa pikaresepeun.</p>
+ <p><b>Sisindiran</b> asal kecap tina <i>sindir</i> nyaéta karya sastra Sunda wangun puisi anu ngagunakeun rakitan basa kalawan dibalibirkeun. Maksud anu rék ditepikeun henteu salawasna disebutkeun sacara togmol, tapi ditepikeun ku ungkara anu diréka sangkan leuwih merenah, éndah, atawa pikaresepeun.</p>
  <div class="callout"><b>Gampangna:</b> sisindiran nyaéta cara nepikeun maksud ku basa anu dirakit. Aya bagian anu jadi panganteur (cangkang) jeung bagian anu ngandung maksud (eusi), iwal wangun wawangsalan anu boga pola husus.</div>
  <h3>Asal jeung kamekaran</h3><p>Sisindiran geus lila hirup dina tradisi sastra jeung komunikasi urang Sunda. Dina kahirupan sapopoé, sisindiran dipaké dina cacahan, lalagaan, mapatahan, nepikeun rasa kanyaah, ogé dina rumpaka kawih. Wangunna terus mekar nuturkeun kahirupan masarakat.</p>
  <h3>Ciri umum</h3><ul><li>Ngagunakeun basa anu diréka, henteu salawasna togmol.</li><li>Aya purwakanti atawa padeukeutna sora.</li><li>Dina paparikan jeung rarakitan, ilaharna aya cangkang jeung eusi.</li><li>Wangun anu ilahar dipaké nyaéta paparikan, rarakitan, jeung wawangsalan.</li><li>Padalisan mindeng diwangun ku dalapan engang, tapi dina prakna bisa kapanggih variasi.</li></ul>
  <h3>Fungsi sisindiran</h3><div class="two"><div class="note"><b>Komunikasi</b><br>Nepikeun maksud ku cara anu leuwih merenah.</div><div class="note"><b>Atikan</b><br>Mapatahan jeung nepikeun ajén kahadéan.</div><div class="note"><b>Éksprési</b><br>Nepikeun rasa kanyaah atawa kaayaan haté.</div><div class="note"><b>Hiburan</b><br>Ngahirupkeun heureuy jeung suasana akrab.</div></div>
- <p class="small">Pék émut: sisindiran lain saukur kecap-kecap anu sarua sorana. Eusi jeung maksudna kudu kaharti.</p>`,
+ <p class="small">Inget: sisindiran lain saukur kecap-kecap anu sarua sorana. Eusi jeung maksudna kudu kaharti.</p>
+`,
  paparikan:`<span class="pill">02 · PAPARIKAN</span><h3>Harti jeung ciri paparikan</h3>
  <p><b>Paparikan</b> nyaéta sisindiran anu diwangun ku cangkang jeung eusi. Kecap paparikan patali jeung kecap <i>parek</i>, anu nuduhkeun padeukeutna sora antara bagian cangkang jeung eusi.</p>
  <ul><li>Ilaharna diwangun ku opat padalisan.</li><li>Padalisan kahiji jeung kadua mangrupa cangkang.</li><li>Padalisan katilu jeung kaopat mangrupa eusi.</li><li>Sora tungtung padalisan kahiji padeukeut jeung katilu, kitu deui kadua jeung kaopat (pola purwakanti a-b-a-b).</li><li>Unggal padalisan ilaharna dalapan engang.</li></ul>
  <h3>Conto paparikan</h3><div class="note"><b>Cangkang</b><br>Ti Pari rék ka kidul,<br>jalanna bras ka kebon.<br><br><b>Eusi</b><br>Mun jadi jelema sebul,<br>moal bisa naon-naon.</div>
  <p><b>Analisis:</b> dua padalisan kahiji ukur panganteur. Maksudna aya dina dua padalisan pamungkas, nyaéta urang ulah sebul. Tungtung padalisan 1 jeung 3 sarua sora <i>-ul</i>, ari padalisan 2 jeung 4 padeukeut sora tungtungna.</p>
- <div class="callout"><b>Inget!</b> Dina paparikan, anu jadi pananda utama nyaéta padeukeutna sora cangkang jeung eusi. Teu kudu aya kecap awal anu diulang.</div>`,
+ <div class="callout"><b>Inget!</b> Dina paparikan, anu jadi pananda utama nyaéta padeukeutna sora cangkang jeung eusi. Teu kudu aya kecap awal anu diulang.</div>
+ <h3>Pedaran leuwih jéntré ngeunaan paparikan</h3>
+ <p>Paparikan dina sapadana diwangun ku opat padalisan. Padalisan kahiji jeung kadua mangrupa cangkang, ari padalisan katilu jeung kaopat mangrupa eusi. Lobana cangkang sarua jeung lobana eusi. Dina conto bahan ajar ieu, unggal padalisan diwangun ku dalapan engang.</p>
+ <p>Paparikan disebut kitu lantaran sora antara cangkang jeung eusina padeukeut. Padalisan kahiji murwakanti jeung padalisan katilu, ari padalisan kadua murwakanti jeung padalisan kaopat. Kecap <i>paparikan</i> patali jeung kecap <i>parek</i>, anu hartina padeukeut.</p>
+ <h4>Conto paparikan watek piwuruk</h4>
+ <div class="note">Hampelas raraga jati,<br>palataran babaléan.<br>Iklas raga reujeung pati,<br>ngabélaan bebeneran.</div>
+ <p><b>Analisis:</b> sora tungtung “jati” padeukeut jeung “pati”, ari “babaléan” padeukeut jeung “bebeneran”. Eusina ngajak ngabéla bebeneran.</p>
+ <h4>Conto paparikan watek sésébréd</h4>
+ <div class="note">Lamun urang olahraga,<br>ulah teuing kacapéan.<br>Ulah hayang kana Rangga,<br>ceulina aya coléan.</div>
+ <p><b>Analisis:</b> sora tungtung “olahraga” padeukeut jeung “Rangga”, ari “kacapéan” padeukeut jeung “coléan”. Eusina mangrupa banyol.</p>
+ <h4>Conto paparikan watek silih asih</h4>
+ <div class="note">Aya meri dina rakit,<br>boboko wadah bakatul.<br>Lain nyeri ku panyakit,<br>kabogoh direbut batur.</div>
+ <p><b>Analisis:</b> “rakit” padeukeut jeung “panyakit”, ari “bakatul” padeukeut jeung “batur”. Eusina nyaritakeun rasa kasedih lantaran kabogoh direbut batur.</p>
+`,
  rarakitan:`<span class="pill">03 · RARAKITAN</span><h3>Harti jeung ciri rarakitan</h3>
  <p><b>Rarakitan</b> nyaéta sisindiran anu wangunna siga papasangan. Kecap atawa frasa dina awal padalisan cangkang dipaké deui dina awal padalisan eusi. Ieu ciri disebut <i>mindoan kawit</i> (ngulang deui kecap mimiti).</p>
  <ul><li>Ilaharna diwangun ku opat padalisan: dua cangkang jeung dua eusi.</li><li>Kecap/frasa mimiti dina cangkang dibalikan deui dina eusi.</li><li>Sora tungtungna ogé disusun murwakanti, ilaharna pola a-b-a-b.</li><li>Unggal padalisan ilaharna dalapan engang.</li></ul>
  <h3>Conto rarakitan</h3><div class="note"><b>Cangkang</b><br>Sing rajin nginum jajamu,<br>nu guna nguatkeun urat.<br><br><b>Eusi</b><br>Sing rajin néangan élmu,<br>nu guna dunya ahérat.</div>
  <p><b>Analisis:</b> kecap <i>Sing rajin</i> dina padalisan kahiji diulang dina padalisan katilu. Frasa <i>nu guna</i> dina padalisan kadua diulang dina padalisan kaopat. Eusina mangrupa piwuruk sangkan rajin néangan élmu.</p>
- <div class="callout"><b>Bédana jeung paparikan:</b> rarakitan boga ciri kecap atawa frasa mimiti anu diulang deui; paparikan mah henteu kudu kitu.</div>`,
+ <div class="callout"><b>Bédana jeung paparikan:</b> rarakitan boga ciri kecap atawa frasa mimiti anu diulang deui; paparikan mah henteu kudu kitu.</div>
+ <h3>Pedaran leuwih jéntré ngeunaan rarakitan</h3>
+ <p>Rarakitan dina sapadana diwangun ku opat padalisan. Padalisan kahiji jeung kadua mangrupa cangkang, ari padalisan katilu jeung kaopat mangrupa eusi. Lobana cangkang sarua jeung lobana eusi. Dina conto bahan ajar ieu, unggal padalisan diwangun ku dalapan engang.</p>
+ <p>Ciri anu ngajadikeun disebut rarakitan nyaéta kecap awal dina padalisan kahiji cangkang sarua jeung kecap awal dina padalisan katilu eusi. Kitu deui kecap awal padalisan kadua sarua jeung kecap awal padalisan kaopat. Ieu disebut <i>mindoan kawit</i>. Cangkang jeung eusina ogé murwakanti dina bagian tungtung.</p>
+ <h4>Conto rarakitan watek piwuruk</h4>
+ <div class="note">Nu getol nginum jajamu,<br>nu guna nguatkeun urat.<br>Nu getol nyiaran élmu,<br>nu guna dunya ahérat.</div>
+ <p><b>Analisis:</b> kecap awal “Nu getol” jeung “nu guna” diulang deui dina padalisan eusi. Eusina mapatahan sangkan getol néangan élmu.</p>
+ <h4>Conto rarakitan watek sésébréd</h4>
+ <div class="note">Rarasaan rék ka Sérang,<br>teu nyaho ka Kadu Buut.<br>Rarasaan awak lenjang,<br>teu nyaho awakna gendut.</div>
+ <p><b>Analisis:</b> kecap “Rarasaan” jeung “teu nyaho” diulang dina awal padalisan eusi. Eusina heureuy ngeunaan awak.</p>
+ <h4>Conto rarakitan watek silih asih</h4>
+ <div class="note">Hayang amat kuéh lapis,<br>teu bisa ngasakanana.<br>Hayang amat ka nu geulis,<br>teu bisa ngakalanana.</div>
+ <p><b>Analisis:</b> kecap “Hayang amat” jeung “teu bisa” diulang. Eusina ngébréhkeun rasa resep atawa kanyaah.</p>
+`,
  wawangsalan:`<span class="pill">04 · WAWANGSALAN</span><h3>Harti jeung ciri wawangsalan</h3>
  <p><b>Wawangsalan</b> nyaéta sisindiran anu diwangun ku dua padalisan. Padalisan kahiji mangrupa cangkang anu eusina tatarucingan atawa babadéan. Padalisan kadua mangrupa eusi anu ngandung kecap konci pikeun nuduhkeun jawabanana.</p>
- <ul><li>Diwangun ku dua padalisan: hiji cangkang jeung hiji eusi.</li><li>Cangkang ngandung tatarucingan anu kudu diteguh.</li><li>Jawabanana disebut <i>wangsal</i>, henteu salawasna ditulis sacara langsung.</li><li>Dina eusi aya kecap anu sorana murwakanti jeung wangsal.</li><li>Unggal padalisan ilaharna dalapan engang.</li></ul>
+ <ul><li>Diwangun ku dua padalisan: hiji cangkang jeung hiji eusi.</li><li>Cangkang ngandung tatarucingan anu kudu dibadé.</li><li>Jawabanana disebut <i>wangsal</i>, henteu salawasna ditulis sacara langsung.</li><li>Dina eusi aya kecap anu sorana murwakanti jeung wangsal.</li><li>Unggal padalisan ilaharna dalapan engang.</li></ul>
  <h3>Conto wawangsalan</h3><div class="note">Alat paranti diuk,<br>nu risi bati nalangsa.<br><br><b>Wangsalna:</b> korsi.</div>
  <p><b>Analisis:</b> cangkang méré gambaran ngeunaan hiji alat. Dina eusi aya kecap <i>risi</i>, anu sorana ngandung patalina jeung kecap <i>korsi</i>. Ku kituna jawaban tatarucinganana nyaéta korsi.</p>
- <div class="callout"><b>Konci wawangsalan:</b> teangan heula barang anu dimaksud ku cangkang, laju tengetan kecap dina eusi anu murwakanti jeung éta jawaban.</div>`,
+ <div class="callout"><b>Konci wawangsalan:</b> teangan heula barang anu dimaksud ku cangkang, laju tengetan kecap dina eusi anu murwakanti jeung éta jawaban.</div>
+ <h3>Pedaran leuwih jéntré ngeunaan wawangsalan</h3>
+ <p>Wawangsalan dina sapadana diwangun ku dua padalisan: sapadalisan cangkang jeung sapadalisan eusi. Dina conto bahan ajar ieu, unggal padalisan diwangun ku dalapan engang. Cangkang mangrupa katerangan ngeunaan hiji barang atawa hal anu kudu diteguh. Jawabanana henteu ditulis langsung, tapi disumputkeun dina salasahiji kecap dina bagian eusi. Jawaban anu nyamuni éta disebut <b>wangsal</b>.</p>
+ <p>Contona, dina “Belut sisit saba darat, kapiraray siang wengi”, cangkangna nanyakeun barang anu dimaksud ku “belut sisit saba darat”. Wangsalna nyaéta <b>oray</b>, lantaran sora kecap éta nyamuni dina kecap “kapiraray”.</p>
+ <h4>Conto wawangsalan séjén</h4>
+ <div class="note">Kendang gedé pakauman,<br>dag-dig-dug rasaning ati.<br><b>Wangsalna:</b> bedug</div>
+ <div class="note">Abdi mah kapiring leutik,<br>isin teuing ku Gamparan.<br><b>Wangsalna:</b> pisin</div>
+ <div class="note">Teu beunang dihurang sawah,<br>teu beunang dipikameumeut.<br><b>Wangsalna:</b> simeut</div>
+ <div class="note">Teu puguh monyét hideungna,<br>asa teu puguh tungtungna.<br><b>Wangsalna:</b> lutung</div>
+ <div class="note">Buah anu loba cucuk,<br>kaduhung harita nampik.<br><b>Wangsalna:</b> kadu</div>
+`,
  unsur:`<span class="pill">05 · UNSUR</span><h3>Unsur wangun sisindiran</h3>
  <p>Pikeun nganalisis sisindiran, urang kudu wawuh kana sababaraha istilah ieu di handap.</p>
  <div class="two"><div class="note"><b>Padalisan</b><br>Unggal jajar atawa baris dina sisindiran.</div><div class="note"><b>Pada</b><br>Sababaraha padalisan anu ngahiji jadi hiji bait.</div><div class="note"><b>Cangkang</b><br>Bagian panganteur dina paparikan jeung rarakitan, biasana dua padalisan kahiji.</div><div class="note"><b>Eusi</b><br>Bagian anu ngandung maksud atawa pesen, biasana dua padalisan pamungkas dina paparikan jeung rarakitan.</div><div class="note"><b>Wangsal</b><br>Jawaban anu nyamuni dina wawangsalan.</div><div class="note"><b>Purwakanti</b><br>Padeukeutna atawa sasaruaan sora dina kecap/padalisan.</div></div>
  <h3>Purwakanti dina sisindiran</h3><p>Dina paparikan jeung rarakitan, sora tungtung padalisan cangkang dipatalikeun jeung sora tungtung padalisan eusi. Pola anu mindeng dipaké nyaéta a-b-a-b. Dina rarakitan, aya deui ciri mindoan kawit, nyaéta ngulang kecap mimiti.</p>
  <h3>Unsur eusi</h3><ul><li><b>Téma/jejer:</b> poko pasualan anu dicaritakeun.</li><li><b>Watek:</b> sipat atawa tujuan eusi, upamana piwuruk, silih asih, jeung sésébréd.</li><li><b>Amanat:</b> pesen atawa piwuruk anu hayang ditepikeun.</li><li><b>Diksi:</b> pilihan kecap anu dipaké ku pangarang.</li></ul>
- <div class="callout"><b>Tips analisis:</b> baca sakabéh padalisan heula, tandaan cangkang jeung eusi, laju tengetan sora tungtung jeung maksudna. Ulah nangtukeun jinis ngan tina hiji kecap.</div>`,
+ <div class="callout"><b>Tips analisis:</b> baca sakabéh padalisan heula, tandaan cangkang jeung eusi, laju tengetan sora tungtung jeung maksudna. Ulah nangtukeun jenis ngan tina hiji kecap.</div>`,
  eusi:`<span class="pill">06 · EUSI JEUNG TUJUAN</span><h3>Rupa-rupa watek sisindiran</h3>
  <p>Dumasar kana eusi atawa maksudna, sisindiran ilaharna dipasing-pasing jadi tilu watek.</p>
- <div class="two"><div class="panel"><h3>Silih asih</h3><p>Eusina ngébréhkeun rasa nyaah, resep, sono, atawa kanyaah ka batur.</p><span class="badge">Rasa kanyaah</span></div><div class="panel"><h3>Piwuruk</h3><p>Eusina mangrupa naséhat, pangéling, atawa ajakan pikeun ngalakukeun kahadéan.</p><span class="badge">Naséhat</span></div><div class="panel"><h3>Sésébréd</h3><p>Eusina heureuy, banyol, atawa sindiran anu matak seuri. Tetep kudu ngajaga kasopanan jeung ulah ngahina batur.</p><span class="badge">Heureuy</span></div></div>
+ <div class="two"><div class="panel"><h3>Silih asih</h3><p>Eusina ngébréhkeun rasa nyaah, resep, sono, atawa kanyaah ka batur.</p><span class="badge">Rasa kanyaah</span></div><div class="panel"><h3>Piwuruk</h3><p>Eusina mangrupa naséhat, pangéling, atawa ajakan pikeun ngalakukeun kahadéan.</p><span class="badge">Naséhat</span></div><div class="panel"><h3>Sésébréd</h3><p>Eusina lalagaan, banyol, atawa sindiran anu matak seuri. Tetep kudu ngajaga kasopanan jeung ulah ngahina batur.</p><span class="badge">Heureuy</span></div></div>
  <h3>Conto watek piwuruk</h3><div class="note">Sawah ngemplang ditanduran,<br>ka huma ngala jarami.<br>Ulah renggang duduluran,<br>dasarna silaturahmi.</div>
  <p><b>Amanatna:</b> urang kudu ngajaga duduluran jeung silaturahmi.</p>
  <h3>Kumaha cara nyieun sisindiran?</h3><ol><li>Tangtukeun téma tina kahirupan sapopoé, sakola, kulawarga, atawa lingkungan.</li><li>Pilih watekna: silih asih, piwuruk, atawa sésébréd.</li><li>Tangtukeun wangunna: paparikan, rarakitan, atawa wawangsalan.</li><li>Susun heula eusi jeung maksud anu rék ditepikeun.</li><li>Rarancang cangkangna, laju saluyukeun purwakanti jeung jumlah engangna.</li><li>Baca nu harus, pariksa deui wirahma, harti, jeung kasopanan basana.</li></ol>
  <div class="callout"><b>Catetan:</b> watek jeung wangun éta dua hal anu béda. Wangun nuduhkeun cara nyusunna, ari watek nuduhkeun eusi atawa maksudna. Paparikan jeung rarakitan bisa ngandung tilu watek; wawangsalan umumna mindeng dipaké pikeun silih asih.</div>`
 };
-function openTopic(id){
- const panel=$('topicPanel');
- panel.innerHTML=(topicContent[id]||'<h3>Matéri teu kapanggih</h3>')+`<div class="navrow"><button onclick="openTopic('wawasan')">Wawasan</button><button onclick="openTopic('paparikan')">Paparikan</button><button onclick="openTopic('rarakitan')">Rarakitan</button><button onclick="openTopic('wawangsalan')">Wawangsalan</button><button onclick="openTopic('unsur')">Unsur</button><button onclick="openTopic('eusi')">Eusi jeung tujuan</button></div>`;
- panel.scrollIntoView({behavior:'smooth',block:'start'});
-}
+function renderFlowingMaterials(){
+ const materialOrder=['wawasan','unsur'];
+ $('flowingMaterials').innerHTML=materialOrder.map((id,i)=>`<article class="panel flowing-topic"><div class="topic-number">MATÉRI ${String(i+1).padStart(2,'0')}</div>${topicContent[id]}</article>`).join('');
 
-// ===== KAULINAN INTERAKTIF =====
-const gameSets={
- jenis:[
-  {q:'Sing rajin nginum jajamu, / nu guna nguatkeun urat. / Sing rajin néangan élmu, / nu guna dunya ahérat.',a:['Paparikan','Rarakitan','Wawangsalan'],c:1,why:'Frasa "Sing rajin" jeung "nu guna" diulang dina awal padalisan eusi. Ieu ciri mindoan kawit dina rarakitan.'},
-  {q:'Ka pasar meuli kalapa, / kalapana diasakan. / Lamun masih boga bapa, / kudu bisa mikahéman.',a:['Paparikan','Rarakitan','Wawangsalan'],c:0,why:'Ieu conto wangun opat padalisan anu miboga cangkang jeung eusi, tanpa ngulang kecap awal. Dina kaulinan ieu diasupkeun kana paparikan.'},
-  {q:'Buah sarupa jeung nangka, / bati kaduhung engkéna.',a:['Paparikan','Rarakitan','Wawangsalan'],c:2,why:'Dua padalisan, cangkangna mangrupa gambaran/tatarucingan sarta aya wangsal dina eusi.'},
-  {q:'Lamun tenget maca buku, / bakal tenget nulis aksara. / Lamun tenget néangan élmu, / bakal tenget dina usaha.',a:['Paparikan','Rarakitan','Wawangsalan'],c:1,why:'Aya kecap awal "Lamun tenget" anu diulang dina padalisan eusi.'},
-  {q:'Ka walungan néangan impun, / impunna diasakan peuting. / Ulah sok resep ngalamun, / mending géh ka Gusti éling.',a:['Paparikan','Rarakitan','Wawangsalan'],c:0,why:'Wangun opat padalisan kalawan cangkang jeung eusi, henteu ngagunakeun pola mindoan kawit.'}
- ],
- unsur:[
-  {q:'Padalisan kahiji jeung kadua dina paparikan ilaharna disebut naon?',a:['Eusi','Cangkang','Wangsal'],c:1,why:'Dina paparikan, dua padalisan kahiji mangrupa cangkang atawa panganteur.'},
-  {q:'Bagian anu ngandung maksud atawa pesen disebut naon?',a:['Eusi','Cangkang','Pada'],c:0,why:'Eusi mangrupa bagian anu nepikeun maksud atawa pesen sisindiran.'},
-  {q:'Padeukeutna atawa sasaruaan sora dina sisindiran disebut naon?',a:['Diksi','Purwakanti','Amanat'],c:1,why:'Purwakanti patali jeung padeukeutna sora dina kecap atawa padalisan.'},
-  {q:'Dina rarakitan, kecap/frasa mimiti anu diulang deui disebut ciri naon?',a:['Mindoan kawit','Wangsal','Pupuh'],c:0,why:'Mindoan kawit nyaéta ngulang deui kecap atawa frasa dina awal padalisan.'},
-  {q:'Jawaban anu nyamuni dina wawangsalan disebut naon?',a:['Cangkang','Padalisan','Wangsal'],c:2,why:'Wangsal nyaéta jawaban tatarucingan anu patali jeung cangkang wawangsalan.'}
- ],
- wangsal:[
-  {q:'Wawangsalan biasana diwangun ku sabaraha padalisan?',a:['Dua','Opat','Genep'],c:0,why:'Wawangsalan ilaharna diwangun ku dua padalisan.'},
-  {q:'Dina wawangsalan, cangkang biasana ngandung naon?',a:['Babadéan/gambaran barang','Naséhat langsung','Kecap anu diulang'],c:0,why:'Cangkang wawangsalan méré gambaran atawa babadéan ngeunaan hiji barang.'},
-  {q:'Naon anu kudu dipaluruh pikeun manggihan wangsal?',a:['Jumlah bait wungkul','Barang anu dimaksud ku cangkang jeung sora kecap dina eusi','Ngaran pangarang'],c:1,why:'Teguh heula gambaran dina cangkang, laju nengetan kecap dina eusi anu murwakanti jeung jawabanana.'}
- ]
-};
-let gameState={type:null,index:0,score:0,answered:false};
-function startGame(type){
- gameState={type,index:0,score:0,answered:false};
- renderGame();
-}
-function renderGame(){
- const set=gameSets[gameState.type],item=set[gameState.index],area=$('gameArea');
- area.innerHTML=`<div class="question-meta">KAULINAN ${gameState.type.toUpperCase()} · SOAL ${gameState.index+1} TI ${set.length}</div><div class="progress-mini"><span style="width:${((gameState.index)/set.length)*100}%"></span></div><h3>${item.q.replaceAll('/','<br>')}</h3><div class="choice-list">${item.a.map((a,i)=>`<button class="choice" onclick="answerGame(${i})">${String.fromCharCode(65+i)}. ${a}</button>`).join('')}</div><div id="gameFeedback" class="feedback" hidden></div><div class="control-row"><button id="gameNext" class="action-btn" onclick="nextGame()" disabled>${gameState.index===set.length-1?'Tingali Hasil':'Soal Saterusna →'}</button><button class="light-btn" onclick="startGame('${gameState.type}')">Balikan deui</button></div>`;
-}
-function answerGame(choice){
- if(gameState.answered)return;
- gameState.answered=true;
- const set=gameSets[gameState.type],item=set[gameState.index],buttons=$('gameArea').querySelectorAll('.choice');
- buttons.forEach((b,i)=>{b.disabled=true;if(i===item.c)b.classList.add('correct');if(i===choice&&i!==item.c)b.classList.add('wrong')});
- if(choice===item.c)gameState.score++;
- const f=$('gameFeedback');f.hidden=false;f.className='feedback '+(choice===item.c?'good':'bad');f.innerHTML=`<b>${choice===item.c?'Bener!':'Can bener.'}</b> ${item.why}`;
- $('gameNext').disabled=false;
-}
-function nextGame(){
- const set=gameSets[gameState.type];
- if(gameState.index<set.length-1){gameState.index++;gameState.answered=false;renderGame();return}
- const pct=Math.round(gameState.score/set.length*100);
- $('gameArea').innerHTML=`<h3>Kaulinan réngsé!</h3><div class="result-score">${pct}%</div><p>Manéh ngajawab bener ${gameState.score} tina ${set.length} soal.</p><div class="feedback ${pct>=70?'good':'bad'}">${pct>=70?'Hadé jasa! Terus pertahankeun pamahaman.':'Ulah pundung. Baca deui matéri, laju jajal deui.'}</div><div class="control-row"><button class="action-btn" onclick="startGame('${gameState.type}')">Ulin deui</button><button class="light-btn" onclick="openPage('latihan')">Ka Latihan →</button></div>`;
- if(pct>=70)complete('kaulinan');
-}
+ $('flowingRupa').innerHTML=`
+ <article class="panel flowing-topic">
+  <div class="topic-number">RUPA-RUPA SISINDIRAN</div>
+  <p>Ditilik tina wangunna, sisindiran éta kabagi jadi <b>paparikan, rarakitan, jeung wawangsalan</b>. Katilu wangun éta miboga ciri anu béda, utamana dina jumlah padalisan, susunan cangkang jeung eusi, sarta cara ngagunakeun purwakanti. Ku kituna, pikeun ngabédakeunana urang kudu niténan sakabéh wangun jeung rakitan kecapna, lain ngan ukur ningali eusina.</p>
+ </article>
 
-// ===== LATIHAN =====
-function practicePick(btn,kind){
- const box=$('practiceQ1');if(box.dataset.done)return;box.dataset.done='1';
- box.querySelectorAll('button').forEach(b=>b.disabled=true);
- btn.classList.add(kind==='correct'?'correct':'wrong');
- if(kind==='wrong')box.querySelectorAll('button')[1].classList.add('correct');
- const f=$('practiceFeedback1');f.hidden=false;f.className='feedback '+(kind==='correct'?'good':'bad');f.textContent=kind==='correct'?'Bener. Dua padalisan pamungkas dina paparikan jeung rarakitan mangrupa eusi.':'Can bener. Dina conto ieu, padalisan katilu jeung kaopat ngandung pesen, jadi kaasup eusi.';
-}
-function practicePair(btn,index){
- const box=$('practiceQ2');if(box.dataset.done)return;box.dataset.done='1';box.querySelectorAll('button').forEach(b=>b.disabled=true);
- const ok=index===0;btn.classList.add(ok?'correct':'wrong');if(!ok)box.querySelectorAll('button')[0].classList.add('correct');
- const f=$('practiceFeedback2');f.hidden=false;f.className='feedback '+(ok?'good':'bad');f.textContent=ok?'Bener. Eusi ieu ngandung piwuruk sangkan rajin ngaji.':'Can merenah. Pilih padalisan anu ngandung piwuruk ngeunaan diajar.';
-}
-function saveCreation(){
- const val=$('createText').value.trim(),f=$('creationFeedback');
- f.hidden=false;
- if(val.length<25){f.className='feedback bad';f.textContent='Sisindiranana masih pondok. Cobi lengkepan heula sangkan maksudna écés.';return}
- try{localStorage.setItem('mpiSisindiranKarya',JSON.stringify({type:$('createType').value,tone:$('createTone').value,text:val}))}catch(e){}
- sendToSheet('update');
- f.className='feedback good';f.innerHTML='<b>Hasil latihan geus disimpen dina browser ieu.</b><br>Pariksa deui: naha wangunna geus luyu, eusina kaharti, purwakantina merenah, jeung basana sopan?';
-}
-function clearCreation(){$('createText').value='';$('creationFeedback').hidden=true}
+ <article class="panel flowing-topic">
+  <div class="topic-number">RUPA 01</div>
+  <h3>PAPARIKAN</h3>
+  <p>Paparikan dina sapadana diwangun ku opat padalisan. Padalisan kahiji jeung kadua mangrupa cangkang, ari padalisan katilu jeung kaopat mangrupa eusi. Lobana cangkang sarua jeung lobana eusi. Dina conto bahan ajar ieu, unggal padalisan diwangun ku dalapan engang.</p>
+  <p>Paparikan disebut kitu lantaran sora antara cangkang jeung eusina padeukeut. Padalisan kahiji murwakanti jeung padalisan katilu, ari padalisan kadua murwakanti jeung padalisan kaopat. Kecap <i>paparikan</i> patali jeung kecap <i>parek</i>, anu hartina padeukeut.</p>
+  <h4>Ciri paparikan</h4>
+  <ul>
+   <li>Ilaharna diwangun ku opat padalisan.</li>
+   <li>Padalisan kahiji jeung kadua mangrupa cangkang.</li>
+   <li>Padalisan katilu jeung kaopat mangrupa eusi.</li>
+   <li>Sora tungtung padalisan kahiji padeukeut jeung katilu, kitu deui kadua jeung kaopat (pola purwakanti a-b-a-b).</li>
+   <li>Unggal padalisan ilaharna dalapan engang.</li>
+  </ul>
+  <h4>Conto paparikan</h4>
+  <div class="note"><b>Cangkang</b><br>Ti Pari rék ka kidul,<br>jalanna bras ka kebon.<br><br><b>Eusi</b><br>Mun jadi jelema sebul,<br>moal bisa naon-naon.</div>
+  <p><b>Analisis:</b> dua padalisan kahiji ukur panganteur. Maksudna aya dina dua padalisan pamungkas, nyaéta urang ulah sebul. Tungtung padalisan 1 jeung 3 sarua sora <i>-ul</i>, ari padalisan 2 jeung 4 padeukeut sora tungtungna.</p>
+  <div class="callout"><b>Inget!</b> Dina paparikan, anu jadi pananda utama nyaéta padeukeutna sora cangkang jeung eusi. Teu kudu aya kecap awal anu diulang.</div>
+ </article>
 
-// ===== ASESMEN =====
-const assessmentQuestions=[
- {q:'Naon anu dimaksud sisindiran?',a:['Karya sastra wangun puisi anu ngagunakeun rakitan basa','Carita panjang ngeunaan sajarah','Paguneman sapopoé tanpa purwakanti','Laporan hasil panalungtikan'],c:0,e:'Sisindiran mangrupa karya sastra wangun puisi anu ngagunakeun rakitan basa pikeun nepikeun maksud.'},
- {q:'Dina paparikan, dua padalisan kahiji disebut...',a:['Eusi','Wangsal','Cangkang','Amanat'],c:2,e:'Dua padalisan kahiji mangrupa cangkang, ari dua padalisan pamungkas mangrupa eusi.'},
- {q:'Ciri anu pangécésna ngabédakeun rarakitan nyaéta...',a:['Diwangun ku hiji padalisan','Aya kecap/frasa awal anu diulang deui','Teu miboga eusi','Salawasna mangrupa babadéan'],c:1,e:'Rarakitan miboga ciri mindoan kawit, nyaéta ngulang kecap atawa frasa dina awal padalisan.'},
- {q:'Wawangsalan ilaharna diwangun ku...',a:['Dua padalisan','Opat padalisan','Genep padalisan','Dalapan padalisan'],c:0,e:'Wawangsalan ilaharna diwangun ku dua padalisan: cangkang jeung eusi.'},
- {q:'Istilah pikeun jawaban anu nyamuni dina wawangsalan nyaéta...',a:['Purwakanti','Padalisan','Wangsal','Pada'],c:2,e:'Wangsal nyaéta jawaban anu kudu diteguh tina gambaran dina cangkang.'},
- {q:'Padeukeutna sora dina kecap atawa padalisan disebut...',a:['Diksi','Purwakanti','Téma','Amanat'],c:1,e:'Purwakanti patali jeung sasaruaan atawa padeukeutna sora.'},
- {q:'Sisindiran anu eusina naséhat atawa pangéling disebut watek...',a:['Silih asih','Sésébréd','Piwuruk','Wawangsalan'],c:2,e:'Piwuruk eusina naséhat, pangéling, atawa ajakan pikeun ngalakukeun kahadéan.'},
- {q:'Sisindiran anu eusina heureuy atawa banyol disebut...',a:['Piwuruk','Sésébréd','Silih asih','Cangkang'],c:1,e:'Sésébréd ngandung heureuy atawa banyol, bari tetep ngajaga kasopanan.'},
- {q:'Dina paparikan jeung rarakitan, bagian anu ngandung maksud utama nyaéta...',a:['Cangkang','Eusi','Judul','Wangsal'],c:1,e:'Eusi mangrupa bagian anu nepikeun maksud atawa amanat sisindiran.'},
- {q:'Mana runtuyan léngkah anu merenah nalika nyieun sisindiran?',a:['Nyieun cangkang heula laju poho kana maksud','Nangtukeun téma jeung watek, nyusun eusi, laju ngarancang cangkang','Nyalin sisindiran batur tanpa maca','Milih kecap sacara acak tanpa mariksa hartina'],c:1,e:'Mimitian ku téma jeung watek, susun maksud/eusi, tuluy rarancang cangkang jeung pariksa deui purwakanti.'}
+ <article class="panel flowing-topic">
+  <div class="topic-number">RUPA 02</div>
+  <h3>RARAKITAN</h3>
+  <p>Rarakitan dina sapadana diwangun ku opat padalisan. Padalisan kahiji jeung kadua mangrupa cangkang, ari padalisan katilu jeung kaopat mangrupa eusi. Lobana cangkang sarua jeung lobana eusi. Dina conto bahan ajar ieu, unggal padalisan diwangun ku dalapan engang.</p>
+  <p>Ciri anu ngajadikeun disebut rarakitan nyaéta kecap awal dina padalisan kahiji cangkang sarua jeung kecap awal dina padalisan katilu eusi. Kitu deui kecap awal padalisan kadua sarua jeung kecap awal padalisan kaopat. Ieu disebut <i>mindoan kawit</i>. Cangkang jeung eusina ogé murwakanti dina bagian tungtung.</p>
+  <h4>Ciri rarakitan</h4>
+  <ul>
+   <li>Ilaharna diwangun ku opat padalisan: dua cangkang jeung dua eusi.</li>
+   <li>Kecap/frasa mimiti dina cangkang dibalikan deui dina eusi.</li>
+   <li>Sora tungtungna ogé disusun murwakanti, ilaharna pola a-b-a-b.</li>
+   <li>Unggal padalisan ilaharna dalapan engang.</li>
+  </ul>
+  <h4>Conto rarakitan</h4>
+  <div class="note"><b>Cangkang</b><br>Sing rajin nginum jajamu,<br>nu guna nguatkeun urat.<br><br><b>Eusi</b><br>Sing rajin néangan élmu,<br>nu guna dunya ahérat.</div>
+  <p><b>Analisis:</b> kecap <i>Sing rajin</i> dina padalisan kahiji diulang dina padalisan katilu. Frasa <i>nu guna</i> dina padalisan kadua diulang dina padalisan kaopat.</p>
+  <div class="callout"><b>Bédana jeung paparikan:</b> rarakitan boga ciri kecap atawa frasa mimiti anu diulang deui; paparikan mah henteu kudu kitu.</div>
+ </article>
+
+ <article class="panel flowing-topic">
+  <div class="topic-number">RUPA 03</div>
+  <h3>WAWANGSALAN</h3>
+  <p>Wawangsalan nyaéta sisindiran anu diwangun ku dua padalisan. Padalisan kahiji mangrupa cangkang anu eusina tatarucingan atawa babadéan. Padalisan kadua mangrupa eusi anu ngandung kecap konci pikeun nuduhkeun jawabanana.</p>
+  <p>Jawabanana henteu ditulis langsung, tapi disumputkeun dina salasahiji kecap dina bagian eusi. Jawaban anu nyamuni éta disebut <b>wangsal</b>.</p>
+  <h4>Ciri wawangsalan</h4>
+  <ul>
+   <li>Diwangun ku dua padalisan: hiji cangkang jeung hiji eusi.</li>
+   <li>Cangkang ngandung tatarucingan anu kudu dibadé.</li>
+   <li>Jawabanana disebut wangsal, henteu salawasna ditulis sacara langsung.</li>
+   <li>Dina eusi aya kecap anu sorana murwakanti jeung wangsal.</li>
+   <li>Unggal padalisan ilaharna dalapan engang.</li>
+  </ul>
+  <h4>Conto wawangsalan</h4>
+  <div class="note">Alat paranti diuk, <span class="small">(pertanyaan atawa babadéan)</span><br>nu risi bati nalangsa. <span class="small">(kecap konci atawa clue)</span><br><b>Wangsalna:</b> korsi.</div>
+  <p><b>Analisis:</b> cangkang méré gambaran ngeunaan hiji alat. Dina eusi aya kecap <i>risi</i>, anu sorana ngandung patalina jeung kecap <i>korsi</i>. Ku kituna jawaban tatarucinganana nyaéta korsi.</p>
+  <div class="callout"><b>Konci wawangsalan:</b> teangan heula barang anu dimaksud ku cangkang, laju tengetan kecap dina eusi anu murwakanti jeung éta jawaban.</div>
+  <h4>Conto wawangsalan séjénna</h4>
+  <div class="note">Kendang gedé pakauman,<br>dag-dig-dug rasaning ati.<br><b>Wangsalna:</b> bedug</div>
+  <div class="note">Abdi mah kapiring leutik,<br>isin teuing ku Gamparan.<br><b>Wangsalna:</b> pisin</div>
+  <div class="note">Teu beunang dihurang sawah,<br>teu beunang dipikameumeut.<br><b>Wangsalna:</b> simeut</div>
+  <div class="note">Teu puguh monyét hideungna,<br>asa teu puguh tungtungna.<br><b>Wangsalna:</b> lutung</div>
+  <div class="note">Buah anu loba cucuk,<br>kaduhung harita nampik.<br><b>Wangsalna:</b> kadu</div>
+ </article>
+
+ <article class="panel flowing-topic">
+  <div class="topic-number">EUSI JEUNG WATEK SISINDIRAN</div>
+  <p>Dumasar kana eusi atawa maksudna, sisindiran ilaharna dipasing-pasing jadi tilu watek.</p>
+  <div class="two">
+   <div class="note"><b>Silih asih</b><br>Eusina ngébréhkeun rasa nyaah, resep, sono, atawa kanyaah ka batur.<br><span class="small">Rasa kanyaah</span></div>
+   <div class="note"><b>Piwuruk</b><br>Eusina mangrupa naséhat, pangéling, atawa ajakan pikeun ngalakukeun kahadéan.<br><span class="small">Naséhat</span></div>
+   <div class="note"><b>Sésébréd</b><br>Eusina lalagaan, banyol, atawa sindiran anu matak seuri. Tetep kudu ngajaga kasopanan jeung ulah ngahina batur.<br><span class="small">Heureuy</span></div>
+  </div>
+  <h4>Conto sisindiran silihasih</h4>
+  <div class="two">
+   <div class="note">Aya meri dina rakit,<br>boboko wadah bakatul.<br>Lain nyeri ku panyakit,<br>kabogoh direbut batur.</div>
+   <div class="note">Hayang amat kuéh lapis,<br>teu bisa ngasakanana.<br>Hayang amat ka nu geulis,<br>teu bisa ngakalanana.</div>
+  </div>
+  <h4>Conto sisindiran piwuruk</h4>
+  <div class="two">
+   <div class="note">Hampelas raraga jati,<br>palataran babaléan.<br>Iklas raga reujeung pati,<br>ngabélaan bebeneran.</div>
+   <div class="note">Nu getol nginum jajamu,<br>nu guna nguatkeun urat.<br>Nu getol nyiaran élmu,<br>nu guna dunya ahérat.</div>
+  </div>
+  <h4>Conto sisindiran sésébréd</h4>
+  <div class="two">
+   <div class="note">Lamun urang olahraga,<br>ulah teuing kacapéan.<br>Ulah hayang kana Rangga,<br>ceulina aya coléan.</div>
+   <div class="note">Rarasaan rék ka Sérang,<br>teu nyaho ka Kadu Buut.<br>Rarasaan awak lenjang,<br>teu nyaho awakna gendut.</div>
+  </div>
+  <h3>Kumaha cara nyieun sisindiran?</h3>
+  <ol>
+   <li>Tangtukeun téma tina kahirupan sapopoé, sakola, kulawarga, atawa lingkungan.</li>
+   <li>Pilih watekna: silih asih, piwuruk, atawa sésébréd.</li>
+   <li>Tangtukeun wangunna: paparikan, rarakitan, atawa wawangsalan.</li>
+   <li>Susun heula eusi jeung maksud anu rék ditepikeun.</li>
+   <li>Rarancang cangkangna, laju saluyukeun purwakanti jeung jumlah engangna.</li>
+   <li>Baca nu harus, pariksa deui wirahma, harti, jeung kasopanan basana.</li>
+  </ol>
+  <div class="callout"><b>Catetan:</b> watek jeung wangun éta dua hal anu béda. Wangun nuduhkeun cara nyusunna, ari watek nuduhkeun eusi atawa maksudna. Paparikan jeung rarakitan bisa ngandung tilu watek; wawangsalan umumna mindeng dipaké pikeun silih asih.</div>
+ </article>`;
+}
+renderFlowingMaterials();
+// ===== EVALUASI VARIATIF =====
+let evaluationItems=[
+ {type:'pg',q:'Dina ieu paparikan, dua padalisan kahiji disebut ...',stim:'Ka pasar meuli kalapa,<br>kalapana diasakan.<br>Lamun masih boga bapa,<br>kudu bisa mikahéman.',a:['Eusi','Cangkang','Wangsal','Amanat'],c:1,why:'Dua padalisan kahiji dina paparikan mangrupa cangkang.'},
+ {type:'pg',q:'Dina conto sisindiran di luhur, padalisan katilu jeung kaopat kaasup kana bagian ...',stim:'Ka pasar meuli kalapa,<br>kalapana diasakan.<br>Lamun masih boga bapa,<br>kudu bisa mikahéman.',a:['Cangkang','Wangsal','Eusi','Purwakanti'],c:2,why:'Dua padalisan pamungkas ngandung maksud atawa pesen, nyaéta eusi.'},
+ {type:'pg',q:'Ciri anu pangécésna dina rarakitan nyaéta ...',a:['Ngandung dua padalisan wungkul','Aya kecap/frasa awal anu diulang deui','Eusina mangrupa babadéan','Teu boga purwakanti'],c:1,why:'Rarakitan miboga ciri mindoan kawit, nyaéta ngulang kecap atawa frasa dina awal padalisan.'},
+ {type:'pg',q:'Wawangsalan ilaharna diwangun ku ... padalisan.',a:['Dua','Tilu','Opat','Lima'],c:0,why:'Wawangsalan ilaharna diwangun ku dua padalisan.'},
+ {type:'pg',q:'Dina wawangsalan “Alat paranti diuk, / nu risi bati nalangsa”, wangsalna nyaéta ...',a:['Korsi','Bangku','Korsi panjang','Korsi kai'],c:0,why:'Cangkang nuduhkeun alat pikeun diuk, sedengkeun kecap “risi” méré sora anu patali jeung “korsi”.'},
+ {type:'pg',q:'Padeukeutna atawa sasaruaan sora dina kecap atawa padalisan disebut ...',a:['Amanat','Diksi','Purwakanti','Padalisan'],c:2,why:'Purwakanti nyaéta padeukeutna atawa sasaruaan sora.'},
+ {type:'pg',q:'Sisindiran anu eusina naséhat atawa pangéling disebut ...',a:['Silih asih','Piwuruk','Sésébréd','Wawangsalan'],c:1,why:'Piwuruk eusina naséhat, pangéling, atawa ajakan pikeun ngalakukeun kahadéan.'},
+ {type:'pg',q:'Sisindiran anu eusina lalagaan atawa banyol disebut ...',a:['Piwuruk','Silih asih','Sésébréd','Cangkang'],c:2,why:'Sésébréd ngandung lalagaan atawa banyol bari tetep ngajaga kasopanan.'},
+ {type:'bs',q:'Dina paparikan, dua padalisan kahiji mangrupa cangkang.',c:true,why:'Cangkang aya dina dua padalisan kahiji.'},
+ {type:'bs',q:'Rarakitan henteu miboga ciri kecap awal anu diulang deui.',c:false,why:'Rarakitan miboga ciri mindoan kawit, nyaéta ngulang kecap/frasa awal.'},
+ {type:'bs',q:'Wangsal nyaéta jawaban anu nyamuni dina wawangsalan.',c:true,why:'Wangsal mangrupa jawaban tina tatarucingan dina cangkang wawangsalan.'},
+ {type:'bs',q:'Silih asih, piwuruk, jeung sésébréd kaasup kana rupa wangun sisindiran.',c:false,why:'Éta mangrupa watek atawa tujuan eusi, lain wangun.'},
+ {type:'pg',q:"Dina paparikan, padalisan katilu jeung kaopat biasana ngandung ...",a:["Cangkang", "Eusi", "Wangsal", "Panganteur"],c:1,why:"Dua padalisan pamungkas dina paparikan mangrupa eusi."},
+ {type:'pg',q:"Pola purwakanti anu ilahar kapanggih dina paparikan nyaéta ...",a:["a-a-a-a", "a-b-a-b", "a-b-b-a", "a-a-b-b"],c:1,why:"Sora tungtung padalisan 1 padeukeut jeung 3, padalisan 2 jeung 4."},
+ {type:'pg',q:"Kecap atawa frasa awal anu diulang deui dina rarakitan disebut ciri ...",a:["Wangsal", "Mindoan kawit", "Panganteur", "Pupuh"],c:1,why:"Mindoan kawit nyaéta ngulang deui kecap/frasa awal."},
+ {type:'pg',q:"Dina wawangsalan, bagian anu ngandung tatarucingan disebut ...",a:["Eusi", "Amanat", "Cangkang", "Purwakanti"],c:2,why:"Cangkang wawangsalan ngandung tatarucingan atawa babadéan."},
+ {type:'pg',q:"Jawaban anu nyamuni dina wawangsalan disebut ...",a:["Padalisan", "Wangsal", "Pada", "Diksi"],c:1,why:"Wangsal nyaéta jawaban tina tatarucingan dina cangkang."},
+ {type:'pg',q:"Dina sisindiran, unggal jajar atawa baris disebut ...",a:["Pada", "Padalisan", "Watek", "Téma"],c:1,why:"Padalisan nyaéta unggal jajar atawa baris."},
+ {type:'pg',q:"Pesen anu hayang ditepikeun ku pangarang disebut ...",a:["Diksi", "Purwakanti", "Amanat", "Cangkang"],c:2,why:"Amanat nyaéta pesen atawa piwuruk anu hayang ditepikeun."},
+ {type:'pg',q:"Sisindiran anu eusina ngébréhkeun rasa kanyaah kaasup watek ...",a:["Piwuruk", "Silih asih", "Sésébréd", "Wawangsalan"],c:1,why:"Silih asih ngébréhkeun rasa nyaah, resep, sono, atawa kanyaah."},
+ {type:'pg',q:"Mana anu kaasup conto fungsi sisindiran dina kahirupan?",a:["Ngan ukur nyatet angka", "Nepikeun naséhat ku basa anu merenah", "Ngaganti sakabéh paguneman", "Nangtukeun jadwal sakola"],c:1,why:"Sisindiran bisa dipaké pikeun mapatahan jeung nepikeun ajén kahadéan."},
+ {type:'pg',q:"Dina rarakitan, kecap awal anu diulang biasana kapanggih dina padalisan ...",a:["1 jeung 2", "1 jeung 3", "2 jeung 3", "3 jeung 4"],c:1,why:"Kecap/frasa awal dina cangkang diulang dina awal eusi."},
+ {type:'pg',q:"Anu ngabédakeun paparikan jeung rarakitan nyaéta ...",a:["Paparikan teu boga eusi", "Rarakitan miboga mindoan kawit", "Paparikan ngan dua padalisan", "Rarakitan teu boga purwakanti"],c:1,why:"Rarakitan miboga ciri kecap/frasa awal anu diulang deui."},
+ {type:'pg',q:"Lamun rék nyieun sisindiran, léngkah awal anu hadé nyaéta ...",a:["Nangtukeun téma", "Nulis wangsal heula", "Ngahapus cangkang", "Nangtukeun eusi"],c:0,why:"Mimitian ku nangtukeun téma tina kahirupan sapopoé."},
+ {type:'pg',q:"Dina conto “Sing rajin nginum jajamu / nu guna nguatkeun urat / Sing rajin néangan élmu / nu guna dunya ahérat”, watekna nyaéta ...",a:["Sésébréd", "Silih asih", "Piwuruk", "Carita"],c:2,why:"Eusina mapatahan sangkan rajin néangan élmu."},
+ {type:'pg',q:"Dina wawangsalan “Alat paranti diuk, / nu risi bati nalangsa”, kecap anu mantuan manggihan wangsal nyaéta ...",a:["alat", "diuk", "risi", "nalangsa"],c:2,why:"Sora kecap 'risi' ngandung patalina jeung 'korsi'."},
+ {type:'pg',q:"Dina sisindiran, pilihan kecap anu dipaké ku pangarang disebut ...",a:["Diksi", "Amanat", "Wangsal", "Pada"],c:0,why:"Diksi nyaéta pilihan kecap."},
+ {type:'pg',q:"Paparikan jeung rarakitan ilaharna diwangun ku ...",a:["Dua padalisan", "Opat padalisan", "Genep padalisan", "Dalapan padalisan"],c:1,why:"Paparikan jeung rarakitan ilaharna opat padalisan."},
+ {type:'pg',q:"Watek sésébréd kudu ditepikeun ku cara ...",a:["Ngahinakeun batur", "Ngagunakeun kecap loma", "Ngajaga kasopanan", "Ngomong togmol"],c:2,why:"Lalagaan jeung sindiran tetep kudu ngajaga kasopanan."},
+ {type:'pg',q:"Dina sisindiran, cangkang miboga fungsi minangka ...",a:["Bagian panganteur", "Jawaban tatarucingan", "Pesen utama", "Kacindekan eusi"],c:0,why:"Cangkang jadi panganteur saméméh eusi ditepikeun."},
+ {type:'pg',q:"Watek sisindiran dumasar kana eusi ilaharna dipasing-pasing jadi ...",a:["Dua", "Tilu", "Opat", "Lima"],c:1,why:"Watekna nyaéta silih asih, piwuruk, jeung sésébréd."},
+ {type:'pg',q:"Mana pernyataan anu bener ngeunaan wangun jeung watek?",a:["Wangun jeung watek sarua hartina", "Wangun nuduhkeun cara nyusun, watek nuduhkeun maksud eusi", "Watek nuduhkeun jumlah padalisan", "Wangun ngan aya dina wawangsalan"],c:1,why:"Wangun nuduhkeun cara nyusun, ari watek nuduhkeun eusi atawa maksud."},
+{type:'pg',sourceDoc:true,q:"Anu henteu kaasup sisindiran nyaéta ....",a:["Paparikan", "Rarakitan", "Pupujian", "Wawangsalan"],c:2,why:"Nu kaasup sisindiran nyaéta rarakitan, paparikan, jeung wawangsalan. Pupujian lain salah sahijina."},
+{type:'pg',sourceDoc:true,q:"Kecap sisindiran asalna tina kecap ....",a:["Sindiran", "Sindir", "Sisindir", "Nyindir"],c:1,why:"Kecap sisindiran asalna tina kecap sindir."},
+{type:'pg',sourceDoc:true,q:"Dina kecap sindir ngandung harti ....",a:["Malibir", "Bruk-brak", "Togmol", "Kemba"],c:0,why:"Sindir ngandung harti nepikeun maksud ku cara malibir, henteu togmol."},
+{type:'pg',sourceDoc:true,q:"Ari rarakitan kecap asalna ....",a:["Rakitan", "Sarakit", "Rarakit", "Rakit"],c:3,why:"Dina pedaran bahan, ngaran rarakitan dipatalikeun jeung rakit anu papak puhuna."},
+{type:'pg',sourceDoc:true,q:"Nilik kana wangunna, paparikan teu béda jeung ....",a:["Rarakitan", "Pupujian", "Wawangsalan", "Papantunan"],c:0,why:"Paparikan jeung rarakitan sarua diwangun ku opat padalisan, dua cangkang jeung dua eusi."},
+{type:'pg',sourceDoc:true,q:"Wawangsalan mah sapadana diwangun ku ....",a:["Dua padalisan", "Tilu padalisan", "Opat padalisan", "Lima padalisan"],c:0,why:"Wawangsalan diwangun ku dua padalisan: hiji cangkang jeung hiji eusi."},
+{type:'pg',sourceDoc:true,q:"Dina wawangsalan “Abdi mah kapiring leutik”, anu dimaksud piring leutik nyaéta ....",a:["Mangkok", "Pisin", "Tatakan", "Piring séng"],c:1,why:"Dina conto bahan, wangsal tina “kapiring leutik” nyaéta pisin."},
+{type:'pg',sourceDoc:true,q:"“Kendang gedé pakauman, / dag-dig-dug rasaning ati.” Éta mangrupa conto ....",a:["Paparikan", "Pupujian", "Rarakitan", "Wawangsalan"],c:3,why:"Éta conto wawangsalan; wangsalna nyaéta bedug."},
+{type:'pg',sourceDoc:true,q:"“Daék sotéh ka Cinangka, / ka Cisitu mah teu purun. / Daék sotéh ka si Aka, / ka nu itu mah teu purun.” Sisindiran di luhur kaasup wangun ....",a:["Paparikan", "Pupujian", "Rarakitan", "Wawangsalan"],c:2,why:"Kecap awal “Daék sotéh ka” diulang dina padalisan katilu, jadi ciri rarakitan."},
+{type:'pg',sourceDoc:true,q:"“Aya manuk dina pager, / na sukuna aya bola. / Lamun urang hayang pinter, / kudu getol ka sakola.” Sisindiran di luhur kaasup wangun ....",a:["Paparikan", "Pupujian", "Rarakitan", "Wawangsalan"],c:0,why:"Ieu paparikan: opat padalisan, sora tungtung cangkang padeukeut jeung sora tungtung eusi."}
 ];
-let assessment={index:0,answers:Array(assessmentQuestions.length).fill(null)};
-function beginAssessment(){
- assessment={index:0,answers:Array(assessmentQuestions.length).fill(null)};
- $('assessmentIntro').hidden=true;$('assessmentResult').hidden=true;$('assessmentArea').hidden=false;renderAssessment();
+let evaluationEssays=[
+ {q:'Jelaskeun bédana cangkang jeung eusi dina paparikan atawa rarakitan. Pasihan conto tina salah sahiji sisindiran anu geus diulik.'},
+ {q:'Baca wawangsalan ieu: “Alat paranti diuk, / nu risi bati nalangsa.” Tangtukeun wangsalna jeung jelaskeun kumaha cara manggihan jawabanana.'},
+ {q:'Jieun hiji sisindiran opat padalisan anu eusina piwuruk ngeunaan diajar. Tandaan mana cangkang jeung mana eusina.'},
+ {type:'bs',q:"Paparikan jeung rarakitan ilaharna diwangun ku opat padalisan.",c:true,why:"Duanana ilaharna diwangun ku opat padalisan."},
+ {type:'bs',q:"Dina paparikan, kecap awal dina cangkang wajib diulang dina eusi.",c:false,why:"Éta ciri husus rarakitan, lain paparikan."},
+ {type:'bs',q:"Wawangsalan miboga cangkang anu eusina tatarucingan.",c:true,why:"Cangkang wawangsalan ngandung tatarucingan."},
+ {type:'bs',q:"Purwakanti patali jeung padeukeutna atawa sasaruaan sora.",c:true,why:"Éta harti purwakanti."},
+ {type:'bs',q:"Amanat nyaéta pilihan kecap anu dipaké ku pangarang.",c:false,why:"Éta harti diksi; amanat nyaéta pesen."},
+ {type:'bs',q:"Silih asih kaasup salah sahiji watek sisindiran.",c:true,why:"Silih asih ngébréhkeun rasa kanyaah."},
+ {type:'bs',q:"Piwuruk eusina heureuy jeung banyol.",c:false,why:"Piwuruk eusina naséhat; heureuy kaasup sésébréd."},
+ {type:'bs',q:"Dina paparikan, dua padalisan kahiji mangrupa eusi.",c:false,why:"Dua padalisan kahiji mangrupa cangkang."},
+ {type:'bs',q:"Wangsal sok ditulis sacara langsung dina padalisan kahiji.",c:false,why:"Wangsal mangrupa jawaban anu nyamuni."},
+ {type:'bs',q:"Dina rarakitan, kecap atawa frasa awal bisa diulang dina bagian eusi.",c:true,why:"Ieu disebut mindoan kawit."},
+ {type:'bs',q:"Sisindiran bisa dipaké pikeun komunikasi, atikan, éksprési, jeung hiburan.",c:true,why:"Éta sababaraha fungsi sisindiran."},
+ {type:'bs',q:"Wangun sisindiran jeung watek sisindiran téh dua hal anu sarua.",c:false,why:"Wangun patali jeung cara nyusun, watek patali jeung maksud eusina."},
+{q:"Jelaskeun tilu rupa sisindiran dumasar kana wangunna. Sebutkeun ciri utama unggal rupa."},
+{q:"Jieun hiji paparikan anu eusina silih asih. Tandaan cangkang jeung eusina."},
+{q:"Jieun hiji rarakitan anu eusina piwuruk. Témbongkeun kecap atawa frasa anu diulang (mindoan kawit)."},
+{q:"Jelaskeun naon anu dimaksud ku purwakanti sarta kumaha peranna dina sisindiran."},
+{q:"Naon bédana wangun sisindiran jeung watek sisindiran? Pasihan conto."},
+{q:"Jelaskeun léngkah-léngkah nyieun sisindiran ti mimiti nangtukeun téma nepi ka mariksa hasilna."}
+];
+// Pisahkeun bank soal dumasar kana wangun evaluasi.
+const _allPG = evaluationItems.filter(q=>q.type==='pg');
+const _allBS = [...evaluationItems.filter(q=>q.type==='bs'), ...evaluationEssays.filter(q=>q.type==='bs')];
+const _allUraian = evaluationEssays.filter(q=>!q.type);
+evaluationItems = [
+ ..._allPG.filter(q=>!q.sourceDoc).slice(0,15),
+ ..._allPG.filter(q=>q.sourceDoc),
+ ..._allBS.slice(0,10)
+];
+const evaluationPG = evaluationItems.filter(q=>q.type==='pg');
+const evaluationBS = evaluationItems.filter(q=>q.type==='bs');
+evaluationEssays = [{q:'Jieun sapada sisindiran (opat padalisan) dumasar kana wangun jeung watek anu dipilih.'}];
+
+
+let evaluation={kind:'pg',index:0,sessionId:'SIS-'+Date.now(),answers:{pg:Array(evaluationPG.length).fill(null),bs:Array(evaluationBS.length).fill(null)},checked:{pg:Array(evaluationPG.length).fill(false),bs:Array(evaluationBS.length).fill(false),essay:Array(evaluationEssays.length).fill(false)},essays:Array(evaluationEssays.length).fill('')};
+function currentBank(){
+ return evaluation.kind==='pg'?evaluationPG:(evaluation.kind==='bs'?evaluationBS:evaluationEssays);
 }
-function renderAssessment(){
- const q=assessmentQuestions[assessment.index];
- $('assessmentCount').textContent=`SOAL ${assessment.index+1} TI ${assessmentQuestions.length}`;
- $('assessmentProgress').style.width=`${(assessment.index/assessmentQuestions.length)*100}%`;
- $('assessmentQuestion').innerHTML=`<h3>${q.q}</h3><div class="choice-list">${q.a.map((a,i)=>`<button class="choice ${assessment.answers[assessment.index]===i?'selected':''}" onclick="selectAssessment(${i})">${String.fromCharCode(65+i)}. ${a}</button>`).join('')}</div>`;
- $('assessmentNotice').hidden=true;
- const btn=$('assessmentArea').querySelector('.action-btn');btn.textContent=assessment.index===assessmentQuestions.length-1?'Pariksa Jawaban':'Soal Saterusna →';
+function beginEvaluation(){
+ evaluation={kind:'pg',index:0,answers:{pg:Array(evaluationPG.length).fill(null),bs:Array(evaluationBS.length).fill(null)},checked:{pg:Array(evaluationPG.length).fill(false),bs:Array(evaluationBS.length).fill(false),essay:Array(evaluationEssays.length).fill(false)},essays:Array(evaluationEssays.length).fill('')};
+ $('evaluationIntro').hidden=true;$('evaluationResult').hidden=true;$('evaluationArea').hidden=false;
+ renderEvaluation();
 }
-function selectAssessment(i){assessment.answers[assessment.index]=i;renderAssessment()}
-function nextAssessment(){
- if(assessment.answers[assessment.index]===null){const n=$('assessmentNotice');n.hidden=false;n.className='feedback bad';n.textContent='Pilih heula salah sahiji jawaban saméméh neruskeun.';return}
- if(assessment.index<assessmentQuestions.length-1){assessment.index++;renderAssessment();return}
- showAssessmentResult();
+function switchEvaluation(kind){
+ evaluation.kind=kind;evaluation.index=0;renderEvaluation();
 }
-function showAssessmentResult(){
- let score=0;assessmentQuestions.forEach((q,i)=>{if(assessment.answers[i]===q.c)score++});
- const pct=Math.round(score/assessmentQuestions.length*100);
+function renderEvaluation(){
+ const bank=currentBank(),q=bank[evaluation.index],kind=evaluation.kind;
+ const total=kind==='pg'?25:(kind==='bs'?10:1);
+ const checked=evaluation.checked[kind][evaluation.index];
+ $('tab-pg').classList.toggle('active',kind==='pg');
+ $('tab-bs').classList.toggle('active',kind==='bs');
+ $('tab-essay').classList.toggle('active',kind==='essay');
+ $('evaluationCount').textContent=`${kind==='pg'?'PILIHAN GANDA':kind==='bs'?'BENAR–SALAH':'URAIAN'} · SOAL ${evaluation.index+1} TI ${total}`;
+ $('evaluationProgress').style.width=((evaluation.index+1)/total*100)+'%';
+ $('evaluationNotice').hidden=true;
+ if(kind==='essay'){
+  let saved={};try{saved=JSON.parse(localStorage.getItem('mpiSisindiranKaryaSorangan')||'{}')}catch(e){}
+  const currentText=evaluation.essays[0]||saved.text||'';
+  $('evaluationQuestion').innerHTML=`<div class="creative-task">
+   <h3>Latihan · Nyieun sisindiran sorangan</h3>
+   <p>Pilih wangun jeung watek sisindiran, laju jieun hiji sapada sisindiran (opat padalisan).</p>
+   <div class="creative-fields">
+    <label><b>Wangun sisindiran</b><select id="creativeForm" class="creative-select"><option ${saved.form==='Paparikan'?'selected':''}>Paparikan</option><option ${saved.form==='Rarakitan'?'selected':''}>Rarakitan</option><option ${saved.form==='Wawangsalan'?'selected':''}>Wawangsalan</option></select></label>
+    <label><b>Watek / tujuan</b><select id="creativeTone" class="creative-select"><option ${saved.tone==='Piwuruk'?'selected':''}>Piwuruk</option><option ${saved.tone==='Silih asih'?'selected':''}>Silih asih</option><option ${saved.tone==='Sésébréd'?'selected':''}>Sésébréd</option></select></label>
+   </div>
+   <label class="creative-writing-label"><b>Tuliskeun sisindiran</b></label>
+   <textarea class="answer-box creative-textarea" id="essayAnswer" placeholder="Tulis sisindiran di dieu...">${escapeHtml(currentText)}</textarea>
+   <div class="control-row creative-actions">
+    <button type="button" class="action-btn" onclick="saveCreativeSisindiran()">Simpen hasil latihan</button>
+    <button type="button" class="light-btn" onclick="clearCreativeSisindiran()">Hapus tulisan</button>
+   </div>
+   <div id="creativeNotice" class="feedback" hidden></div>
+  </div>`;
+  $('evaluationCheck').hidden=true;$('evaluationNext').hidden=true;
+  $('evaluationQuestion').querySelector('#essayAnswer').addEventListener('input',e=>{evaluation.essays[0]=e.target.value;});
+ }else{
+  $('evaluationCheck').hidden=false;$('evaluationNext').hidden=false;
+  const selected=evaluation.answers[kind][evaluation.index];
+  $('evaluationQuestion').innerHTML=`${q.stim?`<div class="note">${q.stim}</div>`:''}<h3>${q.q}</h3><div class="choice-list">${(kind==='pg'?q.a:['Benar','Salah']).map((a,i)=>{const val=kind==='pg'?i:(i===0);return `<button class="choice ${selected===val?'selected':''}" ${checked?'disabled':''} onclick="selectEvaluation('${kind}',${JSON.stringify(val)})">${kind==='pg'?String.fromCharCode(65+i)+'. ':''}${a}</button>`}).join('')}</div>${checked?(()=>{const ok=selected===q.c,answer=kind==='pg'?q.a[q.c]:(q.c?'Benar':'Salah');return `<div class="answer-explanation ${ok?'good':'bad'}"><b>${ok?'Bener!':'Salah!'}</b><p>Jawaban anu bener: <b>${answer}</b></p><p>${q.why}</p></div>`})():''}`;
+ }
+ if(kind==='essay'){
+  $('evaluationCheck').hidden=true;
+  $('evaluationNext').hidden=true;
+  return;
+ }
+ $('evaluationCheck').hidden=checked;
+ $('evaluationNext').hidden=false;
+ $('evaluationNext').disabled=!checked;
+ $('evaluationNext').textContent=evaluation.index===total-1?'Réngsé Bagéan Ieu':'Soal Saterusna →';
+}
+function selectEvaluation(kind,v){
+ if(evaluation.checked[kind][evaluation.index])return;
+ evaluation.answers[kind][evaluation.index]=v;
+ renderEvaluation();
+}
+function checkCurrentAnswer(){
+ const kind=evaluation.kind,bank=currentBank(),q=bank[evaluation.index];
+ if(kind==='essay'){return;}else if(evaluation.answers[kind][evaluation.index]===null){
+  const n=$('evaluationNotice');n.hidden=false;n.className='feedback bad';n.textContent='Pilih heula jawaban saméméh mencét Pariksa Hasil.';return;
+ }
+ evaluation.checked[kind][evaluation.index]=true;
+ renderEvaluation();
+}
+function nextEvaluation(){
+ const kind=evaluation.kind,total=kind==='pg'?25:(kind==='bs'?10:1);
+ if(!evaluation.checked[kind][evaluation.index]){
+  const n=$('evaluationNotice');n.hidden=false;n.className='feedback bad';n.textContent='Pariksa heula jawaban saméméh neruskeun.';return;
+ }
+ if(evaluation.index<total-1){evaluation.index++;renderEvaluation();return;}
+ if(kind==='pg'){switchEvaluation('bs');return;}
+ if(kind==='bs'){switchEvaluation('essay');return;}
+ showEvaluationResult();
+}
+function showEvaluationResult(){
+ let correct=0;
+ evaluationPG.forEach((q,i)=>{if(evaluation.answers.pg[i]===q.c)correct++;});
+ evaluationBS.forEach((q,i)=>{if(evaluation.answers.bs[i]===q.c)correct++;});
+ const pct=Math.round(correct/35*100);
+ window.lastSisindiranScore=pct;state.best=state.best===null?pct:Math.max(state.best,pct);
+ let hist=[];try{hist=JSON.parse(localStorage.getItem('mpiSisindiranHasilDiajar')||'[]')}catch(e){}
+ hist.unshift({tanggal:new Date().toLocaleString('id-ID'),skor:pct,bener:correct,total:35});hist=hist.slice(0,20);
+ try{localStorage.setItem('mpiSisindiranHasilDiajar',JSON.stringify(hist));localStorage.setItem('mpiSisindiranEvaluasiUraian',JSON.stringify(evaluation.essays));}catch(e){}
+ save();sendToSheet('update');
+ const review=[...evaluationPG,...evaluationBS].map((q,i)=>{
+  const kind=q.type,arr=evaluation.answers[kind],idx=(kind==='pg'?evaluationPG:evaluationBS).indexOf(q),given=arr[idx],ok=given===q.c;
+  const answer=kind==='pg'?q.a[q.c]:(q.c?'Benar':'Salah');
+  return `<div class="feedback ${ok?'good':'bad'}"><b>${i+1}. ${ok?'Bener':'Can bener'}</b><br>${q.q}<br><span class="small">Jawaban anu leres: ${answer}. ${q.why}</span></div>`;
+ }).join('');
+ const essayReview=evaluationEssays.map((q,i)=>`<div class="panel"><b>Uraian ${i+1}.</b><p>${q.q}</p><div class="note">${escapeHtml(evaluation.essays[i]).replace(/\\n/g,'<br>')}</div></div>`).join('');
+ $('evaluationArea').hidden=true;$('evaluationResult').hidden=false;
+ $('evaluationResult').innerHTML=`<h3>Hasil Evaluasi</h3><div class="result-score">${pct}%</div><p>Jawaban objektif bener ${correct} tina 35 soal (25 pilihan ganda jeung 10 benar-salah). Jawaban uraian dipintonkeun pikeun dipariksa ku guru.</p><h3>Pamariksaan Jawaban Objektif</h3>${review}<h3>Jawaban Uraian</h3>${essayReview}<div class="control-row"><button class="action-btn" onclick="beginEvaluation()">Jajal Deui</button><button class="light-btn" onclick="showLearningResults()">Hasil Diajar</button><button class="light-btn" onclick="complete('evaluasi');openPage('home')">Réngsé → Beranda</button></div>`;
+ if(pct>=75)complete('evaluasi');
+}
+
+
+function saveCreativeSisindiran(){
+ const form=$('creativeForm').value,tone=$('creativeTone').value,textValue=$('essayAnswer').value.trim();
+ const notice=$('creativeNotice');
+ if(!textValue){notice.hidden=false;notice.className='feedback bad';notice.textContent='Tuliskeun heula sapada sisindiran saméméh nyimpen.';return;}
+ const lines=textValue.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
+ if(lines.length<4){notice.hidden=false;notice.className='feedback bad';notice.textContent='Sisindiran anu dijieun kudu opat padalisan. Pariksa deui jumlah padalisanana.';return;}
+ const record={type:form,form,tone,text:textValue,tanggal:new Date().toLocaleString('id-ID')};
+ try{
+  localStorage.setItem('mpiSisindiranKaryaSorangan',JSON.stringify(record));
+  localStorage.setItem('mpiSisindiranKarya',JSON.stringify(record));
+  localStorage.setItem('mpiSisindiranEvaluasiUraian',JSON.stringify([textValue]));
+ }catch(e){
+  notice.hidden=false;notice.className='feedback bad';notice.textContent='Hasil can bisa disimpen dina panyimpenan browser. Pariksa rohangan panyimpenan atawa setélan browser.';return;
+ }
+ evaluation.essays[0]=textValue;
+ state.karyaSisindiran=record;
+
+ // Catet hasil objektif dina waktos karya uraian disimpen.
+ // Ieu penting sabab bagian Uraian mangrupa tugas kreatif tanpa tombol "soal salajengna".
+ let correct=0;
+ evaluationPG.forEach((q,i)=>{if(evaluation.answers.pg[i]===q.c)correct++;});
+ evaluationBS.forEach((q,i)=>{if(evaluation.answers.bs[i]===q.c)correct++;});
+ const pct=Math.round(correct/35*100);
  window.lastSisindiranScore=pct;
- state.best=state.best===null?pct:Math.max(state.best,pct);save();
- sendToSheet('update');
- $('assessmentArea').hidden=true;$('assessmentResult').hidden=false;
- let review=assessmentQuestions.map((q,i)=>`<div class="feedback ${assessment.answers[i]===q.c?'good':'bad'}"><b>${i+1}. ${assessment.answers[i]===q.c?'Bener':'Can bener'}</b><br>${q.q}<br><span class="small">Jawaban bener: ${q.a[q.c]}. ${q.e}</span></div>`).join('');
- $('assessmentResult').innerHTML=`<h3>Hasil Asesmen</h3><div class="result-score">${pct}%</div><p>Jawaban bener ${score} tina ${assessmentQuestions.length} soal.</p><div class="feedback ${pct>=75?'good':'bad'}">${pct>=75?'Wilujeng! Pamahaman geus hadé.':'Hayu diajar deui. Tengetan pedaran dina unggal soal, laju jajal deui.'}</div><h3>Pedaran Jawaban</h3>${review}<div class="control-row"><button class="action-btn" onclick="beginAssessment()">Jajal Deui</button><button class="light-btn" onclick="complete('asesmen');openPage('home')">Réngsé → Beranda</button></div>`;
- if(pct>=75)complete('asesmen');
+ state.best=state.best===null?pct:Math.max(state.best,pct);
+ let hist=[];try{hist=JSON.parse(localStorage.getItem('mpiSisindiranHasilDiajar')||'[]')}catch(e){}
+ const sesi=evaluation.sessionId||(evaluation.sessionId='SIS-'+Date.now());
+ if(!hist.some(h=>h.sesi===sesi)){
+  hist.unshift({sesi,tanggal:record.tanggal,skor:pct,bener:correct,total:35});
+  hist=hist.slice(0,20);
+ }
+ try{
+  localStorage.setItem('mpiSisindiranHasilDiajar',JSON.stringify(hist));
+  localStorage.setItem('mpiSisindiranEvaluasiUraian',JSON.stringify([textValue]));
+ }catch(e){}
+ complete('evaluasi');
+ notice.hidden=false;notice.className='feedback good';notice.textContent=`Hasil latihan geus disimpen. Progres Evaluasi geus diropéa. Skor objektif: ${pct}% (${correct}/25). Guru tiasa mariksa karya uraian.`;
+}
+function clearCreativeSisindiran(){
+ $('essayAnswer').value='';
+ evaluation.essays[0]='';
+ try{localStorage.removeItem('mpiSisindiranKaryaSorangan');localStorage.removeItem('mpiSisindiranKarya');localStorage.removeItem('mpiSisindiranEvaluasiUraian');}catch(e){}
+ delete state.karyaSisindiran;save();
+ const notice=$('creativeNotice');notice.hidden=false;notice.className='feedback';notice.textContent='Tulisan geus dikosongkeun.';
+}
+
+function showEvaluationIntro(){
+ $('evaluationIntro').hidden=false;$('evaluationArea').hidden=true;$('evaluationResult').hidden=true;
+}
+function showLearningResults(){
+ $('evaluationIntro').hidden=true;$('evaluationArea').hidden=true;$('evaluationResult').hidden=false;
+ let hist=[];try{hist=JSON.parse(localStorage.getItem('mpiSisindiranHasilDiajar')||'[]')}catch(e){}
+ const rows=hist.length?hist.map((h,i)=>`<tr><td>${i+1}</td><td>${escapeHtml(h.tanggal)}</td><td><b>${h.skor}%</b></td><td>${h.bener}/${h.total}</td></tr>`).join(''):'<tr><td colspan="4">Can aya hasil evaluasi anu kacatet.</td></tr>';
+ const karya=state.karyaSisindiran||(()=>{try{return JSON.parse(localStorage.getItem('mpiSisindiranKaryaSorangan')||'null')}catch(e){return null}})();
+ const karyaPanel=karya?`<div class="panel"><h3>Karya Sisindiran Anu Disimpen</h3><p><b>Wangun:</b> ${escapeHtml(karya.form)} &nbsp; <b>Watek:</b> ${escapeHtml(karya.tone)}</p><div class="note" style="white-space:pre-line">${escapeHtml(karya.text)}</div><p class="small">Disimpen: ${escapeHtml(karya.tanggal||'')}</p></div>`:'<div class="panel"><h3>Karya Sisindiran</h3><p>Can aya karya anu disimpen.</p></div>';
+ $('evaluationResult').innerHTML=`<h3>Hasil Diajar</h3><p>Skor pangluhurna: <b>${state.best===null?'—':state.best+'%'}</b></p><div style="overflow-x:auto"><table class="result-table"><thead><tr><th>No.</th><th>Waktu</th><th>Skor</th><th>Jawaban bener</th></tr></thead><tbody>${rows}</tbody></table></div>${karyaPanel}<div class="control-row"><button class="action-btn" onclick="showEvaluationIntro()">Balik ka Evaluasi</button></div>`;
+}
+function resetEvaluation(){
+ const ok=confirm('Naha rék ngareset sakabéh hasil evaluasi jeung skor pangluhurna dina alat ieu?');
+ if(!ok)return;
+ try{
+  localStorage.removeItem('mpiSisindiranHasilDiajar');
+  localStorage.removeItem('mpiSisindiranEvaluasiUraian');
+  localStorage.removeItem('mpiSisindiranKaryaSorangan');
+  localStorage.removeItem('mpiSisindiranKarya');
+ }catch(e){}
+ state.best=null;
+ delete state.karyaSisindiran;
+ state.done=state.done.filter(x=>x!=='evaluasi');
+ save();
+ window.lastSisindiranScore=null;
+ showEvaluationIntro();
+ alert('Hasil evaluasi geus direset.');
 }
 
 $('visitorForm').addEventListener('submit',e=>{e.preventDefault();const name=$('visitorName').value.trim(),origin=$('visitorOrigin').value;if(!name||!origin)return;try{localStorage.setItem('mpiSisindiranNama',name);localStorage.setItem('mpiSisindiranAsal',origin)}catch(e){}sendToSheet('visitor');$('visitorGate').style.display='none'});
